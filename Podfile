@@ -13,5 +13,6 @@ pod 'ImageSlideshow'
 pod 'FloatingPanel', '2.4.0'
 pod 'XLPagerTabStrip', '9.0.0'
 pod 'SwiftHEXColors', '1.4.1'
+pod 'TagListView', '1.4.1'
 
 end

@@ -48,18 +48,11 @@ public class MenuFloatingPanelController: FloatingPanelController, FloatingPanel
     }
     
     public func floatingPanelDidMove(_ fpc: FloatingPanelController) {
-        if maxY == 0 {
-            if isInitialLoad {
-                isInitialLoad = false
-                return
-            }
-            let loc = fpc.surfaceLocation
-            layoutChangesDelegate?.floatingPanelDidMoved?(y: loc.y)
-            
-        } else if fpc.isAttracting == false {
-            let loc = fpc.surfaceLocation
+        let loc = fpc.surfaceLocation
+        if loc.y > maxY {
             fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
         }
+        layoutChangesDelegate?.floatingPanelDidMoved?(y: loc.y)
     }
     
     public func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {

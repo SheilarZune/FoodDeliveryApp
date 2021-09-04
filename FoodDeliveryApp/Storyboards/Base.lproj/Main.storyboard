@@ -9,6 +9,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--HomeVC-->
         <scene sceneID="tne-QT-ifu">
@@ -19,13 +24,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="92e-RK-wgm" customClass="ImageSlideshow" customModule="ImageSlideshow">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="537.5"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="609.5"/>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6ib-4n-aH1">
-                                <rect key="frame" x="0.0" y="457.5" width="414" height="438.5"/>
+                                <rect key="frame" x="0.0" y="529.5" width="414" height="366.5"/>
                             </containerView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAL-c1-GOj">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nAL-c1-GOj" customClass="FloatingButton" customModule="FoodDeliveryApp" customModuleProvider="target">
                                 <rect key="frame" x="344" y="826" width="50" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -34,19 +39,14 @@
                                 </constraints>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" image="cart.fill" catalog="system"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="25"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3g0-mR-X2V">
                                 <rect key="frame" x="377" y="823" width="20" height="20"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z3p-XW-0b1">
-                                        <rect key="frame" x="6.5" y="3" width="7" height="14.5"/>
+                                        <rect key="frame" x="6.5" y="2" width="7" height="16.5"/>
                                         <color key="backgroundColor" systemColor="systemGreenColor"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                         <color key="textColor" red="0.96078431369999995" green="0.96078431369999995" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -66,7 +66,7 @@
                             <constraint firstItem="6ib-4n-aH1" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="0Pn-Wc-jtA"/>
                             <constraint firstItem="92e-RK-wgm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1hQ-nu-UWC"/>
                             <constraint firstItem="6ib-4n-aH1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4Nq-gu-iyO"/>
-                            <constraint firstItem="92e-RK-wgm" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.6" id="7nG-dQ-5Lv"/>
+                            <constraint firstItem="92e-RK-wgm" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.68" id="7nG-dQ-5Lv"/>
                             <constraint firstAttribute="bottom" secondItem="6ib-4n-aH1" secondAttribute="bottom" id="DD4-1e-zzy"/>
                             <constraint firstItem="6ib-4n-aH1" firstAttribute="top" secondItem="92e-RK-wgm" secondAttribute="bottom" constant="-80" id="DNW-uY-S2D"/>
                             <constraint firstItem="92e-RK-wgm" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="E55-89-l6t"/>

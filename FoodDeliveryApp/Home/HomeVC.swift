@@ -13,7 +13,7 @@ class HomeVC: UIViewController {
     
     @IBOutlet weak var imageSlideShow: ImageSlideshow!
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var btnCart: UIButton!
+    @IBOutlet weak var btnCart: FloatingButton!
     @IBOutlet weak var cartItemCountView: UIView!
     
     @IBOutlet weak var lblCartItemCount: UILabel!
@@ -23,6 +23,7 @@ class HomeVC: UIViewController {
     private var fpc: MenuFloatingPanelController?
     private var initialY: CGFloat = 0
     
+    let pageVC = SwipePageVC()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,8 +31,7 @@ class HomeVC: UIViewController {
     }
     
     func setupView() {
-        btnCart.addShadow(ofColor: .black, offset: .init(width: -1, height: 2), opacity: 0.2)
-        
+       
         setupImageSlideShow()
         setupFloatingPanel()
         
@@ -41,14 +41,17 @@ class HomeVC: UIViewController {
     }
     
     private func setupFloatingPanel() {
-        let pageVC = MenuPageVC()
+        
         let pizzaVC = MenuVC.create(category: .pizza)
         let sushiVC = MenuVC.create(category: .sushi)
+        let drinksVC = MenuVC.create(category: .drinks)
         
-        pageVC.childs = [pizzaVC, sushiVC]
-        pageVC.buttonBarHeight = topSafeArea + 72
+        pageVC.childs = [pizzaVC, sushiVC, drinksVC]
+        pageVC.buttonBarHeight = 78
+        pageVC.customDelegate = self
         
         fpc = MenuFloatingPanelController()
+        fpc?.maxY = containerView.layer.frame.minY
         fpc?.layoutChangesDelegate = self
         fpc?.backgroundColor = Color.WhiteGray.instance()
         fpc?.set(contentViewController: pageVC)
@@ -68,7 +71,7 @@ class HomeVC: UIViewController {
             return
         }
         
-        imageSlideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 56))
+        imageSlideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 66))
         imageSlideShow.contentScaleMode = .scaleAspectFill
         imageSlideShow.setImageInputs([ImageSource(image: bannerImage),
                                        ImageSource(image: bannerImage),
@@ -77,15 +80,24 @@ class HomeVC: UIViewController {
 
 }
 
+extension HomeVC: SwipePageVCDelegate {
+    func didChangePage(to page: Int) {
+        let scrollView = pageVC.childs[page].view.subviews.filter({ $0 is UIScrollView }).first as? UIScrollView
+        if let scrollView = scrollView {
+            fpc?.track(scrollView: scrollView)
+        }
+    }
+}
+
 extension HomeVC: MenuFloatingPanelLayoutChangesDelegate {
-   
+    
     func floatingPanelDidMoved(y: CGFloat) {
         if initialY == 0 {
             initialY = y
         }
-        
+       
         let top = initialY - y
         imageSliderTopConstraint.constant = top < 0 ? 0 : -top
-        print("top: \(top)")
+        pageVC.buttonBarView.isHidden = y > 0 ? false : true
     }
 }

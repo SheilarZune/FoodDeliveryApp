@@ -47,7 +47,7 @@ class MenuVC: UIViewController, AppStoryboard, IndicatorInfoProvider {
     func setupView() {
         tblMenu.dataSource = self
         tblMenu.delegate = self
-        tblMenu.register(nib: MenuCell.className)
+        tblMenu.register(nibs: [MenuFilterCell.className, MenuCell.className])
     }
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -58,16 +58,22 @@ class MenuVC: UIViewController, AppStoryboard, IndicatorInfoProvider {
 extension MenuVC: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return section == 0 ? 1 : 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.deque(MenuCell.self)
-        return cell
+        switch indexPath.section {
+        case 0:
+            let cell = tableView.deque(MenuFilterCell.self)
+            return cell
+        default:
+            let cell = tableView.deque(MenuCell.self)
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

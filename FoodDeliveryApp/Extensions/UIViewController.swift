@@ -25,3 +25,7 @@ public var bottomSafeArea: CGFloat {
 public var statusBarHeight: CGFloat {
     return UIApplication.shared.statusBarFrame.height
 }
+
+public extension UIViewController {
+    
+}

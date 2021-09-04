@@ -24,6 +24,7 @@ PODS:
     - RxCocoa (~> 4.0)
     - RxSwiftExt/Core
   - SwiftHEXColors (1.4.1)
+  - TagListView (1.4.1)
   - XLPagerTabStrip (9.0.0)
 
 DEPENDENCIES:
@@ -32,7 +33,8 @@ DEPENDENCIES:
   - Moya/RxSwift (= 13.0.1)
   - ObjectMapper (= 4.2.0)
   - RxSwiftExt (= 3.4.0)
-  - SwiftHEXColors
+  - SwiftHEXColors (= 1.4.1)
+  - TagListView
   - XLPagerTabStrip (= 9.0.0)
 
 SPEC REPOS:
@@ -47,6 +49,7 @@ SPEC REPOS:
     - RxSwift
     - RxSwiftExt
     - SwiftHEXColors
+    - TagListView
     - XLPagerTabStrip
 
 SPEC CHECKSUMS:
@@ -60,8 +63,9 @@ SPEC CHECKSUMS:
   RxSwift: f172070dfd1a93d70a9ab97a5a01166206e1c575
   RxSwiftExt: 01f8ecbeeb355698e9c75365ebe908b00dacf45d
   SwiftHEXColors: 1cb6e5d55c52749aa33db8f088ac55eb71ca4c7f
+  TagListView: a1c236d17960a0cf64156725a76ce6d73ebce2be
   XLPagerTabStrip: 61c57fd61f611ee5f01ff1495ad6fbee8bf496c5
 
-PODFILE CHECKSUM: c2386e90f3a23d999fa25ccd1a9bfd99cf2ea502
+PODFILE CHECKSUM: 2f43effe829ca7b146ae08a3c823e90963763a97
 
 COCOAPODS: 1.11.0
