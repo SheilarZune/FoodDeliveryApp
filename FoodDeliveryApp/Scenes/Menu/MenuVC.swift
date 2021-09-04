@@ -25,9 +25,9 @@ enum MenuCategory {
     }
 }
 
-class MenuVC: UIViewController, AppStoryboard, IndicatorInfoProvider {
+class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
 
-    static var storyboard: Storyboard = .main
+    static var storyboard: Storyboard = .menu
     
     @IBOutlet weak var tblMenu: UITableView!
     
@@ -44,7 +44,7 @@ class MenuVC: UIViewController, AppStoryboard, IndicatorInfoProvider {
         setupView()
     }
     
-    func setupView() {
+    private func setupView() {
         tblMenu.dataSource = self
         tblMenu.delegate = self
         tblMenu.register(nibs: [MenuFilterCell.className, MenuCell.className])
@@ -79,5 +79,4 @@ extension MenuVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
     }
-    
 }

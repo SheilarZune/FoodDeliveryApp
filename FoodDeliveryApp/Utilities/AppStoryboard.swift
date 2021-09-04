@@ -9,6 +9,9 @@ import UIKit
 
 enum Storyboard: String {
     case main = "Main"
+    case cart = "Cart"
+    case menu = "Menu"
+    case order = "Order"
 }
 
 protocol AppStoryboard: NSObject {

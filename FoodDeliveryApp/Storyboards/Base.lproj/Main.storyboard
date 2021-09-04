@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eGQ-TN-LvO">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -77,6 +76,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nAL-c1-GOj" secondAttribute="trailing" constant="20" id="r93-no-ch2"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="8ec-kJ-Fdf"/>
                     <connections>
                         <outlet property="btnCart" destination="nAL-c1-GOj" id="HgN-ft-tXn"/>
                         <outlet property="cartItemCountView" destination="3g0-mR-X2V" id="5Oz-oY-LLq"/>
@@ -89,44 +89,84 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="96.428571428571431"/>
+            <point key="canvasLocation" x="836" y="96"/>
         </scene>
-        <!--MenuVC-->
-        <scene sceneID="kAF-R6-nXC">
+        <!--Cart ContainerVC-->
+        <scene sceneID="VIv-aw-IyK">
             <objects>
-                <viewController storyboardIdentifier="MenuVC" id="uIt-YG-x5y" customClass="MenuVC" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="YMR-Y5-UMc">
+                <viewController storyboardIdentifier="CartContainerVC" id="axO-3o-ar1" customClass="CartContainerVC" customModule="FoodDeliveryApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YZ0-Id-7jj">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="eJu-AR-AbY">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" name="WhiteGray"/>
-                            </tableView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t7N-6T-Zjd">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                            </containerView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="COy-h4-0Ez">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="88"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QE9-6A-Tcc">
+                                        <rect key="frame" x="12" y="44" width="64" height="44"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="44" id="DY9-rF-hHp"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="12" maxY="0.0"/>
+                                        <state key="normal" title="Menu" image="icoNavBack">
+                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="QE9-6A-Tcc" secondAttribute="bottom" id="AKz-zV-h0R"/>
+                                    <constraint firstItem="QE9-6A-Tcc" firstAttribute="leading" secondItem="COy-h4-0Ez" secondAttribute="leading" constant="12" id="rp9-KF-Djr"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="cfw-0j-BOP"/>
+                        <viewLayoutGuide key="safeArea" id="Jkc-eU-6H2"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eJu-AR-AbY" firstAttribute="top" secondItem="YMR-Y5-UMc" secondAttribute="top" id="1sa-uH-hj8"/>
-                            <constraint firstAttribute="bottom" secondItem="eJu-AR-AbY" secondAttribute="bottom" id="RfA-KT-8qW"/>
-                            <constraint firstAttribute="trailing" secondItem="eJu-AR-AbY" secondAttribute="trailing" id="qRS-an-xJ4"/>
-                            <constraint firstItem="eJu-AR-AbY" firstAttribute="leading" secondItem="cfw-0j-BOP" secondAttribute="leading" id="uMY-Qa-pFc"/>
+                            <constraint firstItem="t7N-6T-Zjd" firstAttribute="leading" secondItem="Jkc-eU-6H2" secondAttribute="leading" id="F3J-MG-t9V"/>
+                            <constraint firstItem="COy-h4-0Ez" firstAttribute="top" secondItem="YZ0-Id-7jj" secondAttribute="top" id="FoA-sp-Npd"/>
+                            <constraint firstAttribute="bottom" secondItem="t7N-6T-Zjd" secondAttribute="bottom" id="Hep-wn-5aN"/>
+                            <constraint firstItem="COy-h4-0Ez" firstAttribute="trailing" secondItem="Jkc-eU-6H2" secondAttribute="trailing" id="Mfi-LE-GiZ"/>
+                            <constraint firstItem="QE9-6A-Tcc" firstAttribute="top" secondItem="Jkc-eU-6H2" secondAttribute="top" id="UfT-cD-jip"/>
+                            <constraint firstAttribute="trailing" secondItem="t7N-6T-Zjd" secondAttribute="trailing" id="ZME-6Q-z70"/>
+                            <constraint firstItem="COy-h4-0Ez" firstAttribute="leading" secondItem="Jkc-eU-6H2" secondAttribute="leading" id="pYB-fx-4Ib"/>
+                            <constraint firstItem="t7N-6T-Zjd" firstAttribute="top" secondItem="COy-h4-0Ez" secondAttribute="bottom" id="t5V-bV-daA"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tblMenu" destination="eJu-AR-AbY" id="s6B-0T-6c6"/>
+                        <outlet property="btnBack" destination="QE9-6A-Tcc" id="Yxn-uC-DXa"/>
+                        <outlet property="containerView" destination="t7N-6T-Zjd" id="3Mf-rG-FJ7"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BzG-ql-aY1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qGg-K3-0gb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="831.88405797101461" y="95.758928571428569"/>
+            <point key="canvasLocation" x="1524.6376811594205" y="104.46428571428571"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="mQw-u5-E2V">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="eGQ-TN-LvO" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Vg4-yA-dw5">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4jG-EM-X4D"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="chc-bj-mxZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="96.428571428571431"/>
         </scene>
     </scenes>
     <resources>
         <image name="cart.fill" catalog="system" width="128" height="102"/>
-        <namedColor name="WhiteGray">
-            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
+        <image name="icoNavBack" width="24" height="24"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

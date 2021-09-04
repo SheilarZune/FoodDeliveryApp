@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+        </array>
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CartCell" rowHeight="139" id="KGk-i7-Jjw" customClass="CartCell" customModule="FoodDeliveryApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="395" height="139"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="395" height="139"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NQr-Ea-KyY">
+                        <rect key="frame" x="0.0" y="0.0" width="395" height="75"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hawaiian" translatesAutoresizingMaskIntoConstraints="NO" id="HLu-dv-k26">
+                                <rect key="frame" x="16" y="0.0" width="75" height="75"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="HLu-dv-k26" secondAttribute="height" multiplier="1:1" id="60L-9U-3MZ"/>
+                                    <constraint firstAttribute="height" constant="75" id="y8I-3A-4oJ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hawailian" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hyD-tn-gDi">
+                                <rect key="frame" x="107" y="28" width="64" height="19.5"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XBP-Gm-fTq">
+                                <rect key="frame" x="339" y="15.5" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="CS6-x4-xdT"/>
+                                    <constraint firstAttribute="width" constant="44" id="Yto-zj-tzv"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="trash" catalog="system"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="46 USD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PRf-Qz-SlF">
+                                <rect key="frame" x="282.5" y="27.5" width="48.5" height="20"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="HLu-dv-k26" firstAttribute="top" secondItem="NQr-Ea-KyY" secondAttribute="top" id="3Dd-jx-LGe"/>
+                            <constraint firstAttribute="bottom" secondItem="HLu-dv-k26" secondAttribute="bottom" id="Dbv-k7-add"/>
+                            <constraint firstItem="PRf-Qz-SlF" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hyD-tn-gDi" secondAttribute="trailing" constant="16" id="HFP-0t-Epo"/>
+                            <constraint firstAttribute="trailing" secondItem="XBP-Gm-fTq" secondAttribute="trailing" constant="12" id="INl-QQ-K73"/>
+                            <constraint firstItem="HLu-dv-k26" firstAttribute="leading" secondItem="NQr-Ea-KyY" secondAttribute="leading" constant="16" id="Nvu-Wm-Sk0"/>
+                            <constraint firstItem="hyD-tn-gDi" firstAttribute="centerY" secondItem="HLu-dv-k26" secondAttribute="centerY" id="O6M-uH-epP"/>
+                            <constraint firstItem="PRf-Qz-SlF" firstAttribute="centerY" secondItem="HLu-dv-k26" secondAttribute="centerY" id="WpO-nf-MxR"/>
+                            <constraint firstItem="hyD-tn-gDi" firstAttribute="leading" secondItem="HLu-dv-k26" secondAttribute="trailing" constant="16" id="fPL-Ea-Zmu"/>
+                            <constraint firstItem="XBP-Gm-fTq" firstAttribute="leading" secondItem="PRf-Qz-SlF" secondAttribute="trailing" constant="8" id="pVT-sh-UUE"/>
+                            <constraint firstItem="XBP-Gm-fTq" firstAttribute="centerY" secondItem="HLu-dv-k26" secondAttribute="centerY" id="yR8-dq-1R9"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="NQr-Ea-KyY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="08K-SO-FNT"/>
+                    <constraint firstItem="NQr-Ea-KyY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Q7F-Kx-L6s"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="NQr-Ea-KyY" secondAttribute="bottom" constant="20" id="SBZ-yP-qLm"/>
+                    <constraint firstAttribute="trailing" secondItem="NQr-Ea-KyY" secondAttribute="trailing" id="h93-7C-wN5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="184.78260869565219" y="133.59375"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="hawaiian" width="1000" height="972"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

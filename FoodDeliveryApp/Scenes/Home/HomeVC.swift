@@ -8,8 +8,10 @@
 import UIKit
 import FloatingPanel
 import ImageSlideshow
+import RxSwift
+import RxCocoa
 
-class HomeVC: UIViewController {
+class HomeVC: BaseVC {
     
     @IBOutlet weak var imageSlideShow: ImageSlideshow!
     @IBOutlet weak var containerView: UIView!
@@ -20,10 +22,10 @@ class HomeVC: UIViewController {
     @IBOutlet weak var imageSliderTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageSliderHeightConstraint: NSLayoutConstraint!
     
+    private let pageVC = SwipePageVC()
     private var fpc: MenuFloatingPanelController?
     private var initialY: CGFloat = 0
-    
-    let pageVC = SwipePageVC()
+    private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +40,13 @@ class HomeVC: UIViewController {
         cartItemCountView.cornerRadius = cartItemCountView.frame.height / 2
         view.bringSubviewToFront(btnCart)
         view.bringSubviewToFront(cartItemCountView)
+        
+        // interactions
+        btnCart.rx.tap
+            .bind(onNext: {
+                let vc = CartContainerVC.screen()
+                self.navigationController?.pushViewController(vc, animated: true)
+            }).disposed(by: bag)
     }
     
     private func setupFloatingPanel() {
@@ -48,6 +57,7 @@ class HomeVC: UIViewController {
         
         pageVC.childs = [pizzaVC, sushiVC, drinksVC]
         pageVC.buttonBarHeight = 78
+        pageVC.buttonBarViewAlignment = .bottom
         pageVC.customDelegate = self
         
         fpc = MenuFloatingPanelController()
@@ -61,7 +71,12 @@ class HomeVC: UIViewController {
             fpc?.track(scrollView: scrollView)
         }
         
-        fpc?.set(initialTopInset: containerView.layer.frame.minY, finalTopInset: -(pageVC.buttonBarHeight - statusBarHeight))
+        if hasTopNotch {
+            fpc?.set(initialTopInset: containerView.frame.minY, finalTopInset: -(pageVC.buttonBarHeight - statusBarHeight))
+        } else {
+            fpc?.set(initialTopInset: containerView.frame.minY - 120, finalTopInset: -(pageVC.buttonBarHeight - statusBarHeight))
+        }
+        
         fpc?.addPanel(toParent: self)
     }
     
