@@ -47,17 +47,17 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150 grams, 35 cm" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hDB-pr-zul">
-                                <rect key="frame" x="16" y="328.5" width="150" height="16.5"/>
+                                <rect key="frame" x="16" y="328.5" width="140" height="16.5"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEV-dn-DFb">
-                                <rect key="frame" x="182" y="320.5" width="70" height="32"/>
+                                <rect key="frame" x="172" y="320.5" width="80" height="32"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="32" id="cvu-tb-46H"/>
-                                    <constraint firstAttribute="width" constant="70" id="foT-A0-ifT"/>
+                                    <constraint firstAttribute="width" constant="80" id="foT-A0-ifT"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                 <state key="normal" title="46 USD">
