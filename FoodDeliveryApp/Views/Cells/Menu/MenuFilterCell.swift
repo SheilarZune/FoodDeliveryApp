@@ -12,6 +12,7 @@ class MenuFilterCell: UITableViewCell {
 
     @IBOutlet weak var filterItemsView: TagListView!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

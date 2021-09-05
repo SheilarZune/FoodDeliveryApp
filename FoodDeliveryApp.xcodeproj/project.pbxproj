@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52150AED26E503DB00878532 /* BaseResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AEC26E503DB00878532 /* BaseResponse.swift */; };
+		52150AEF26E50EB000878532 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AEE26E50EB000878532 /* MenuPresenter.swift */; };
+		52150AF126E50EB700878532 /* MenuRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AF026E50EB700878532 /* MenuRouter.swift */; };
+		52150AF326E50EC300878532 /* MenuInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AF226E50EC300878532 /* MenuInteractor.swift */; };
+		52150AF526E5179300878532 /* ErrorTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AF426E5179300878532 /* ErrorTracker.swift */; };
+		52150AF726E517AA00878532 /* ActivityTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AF626E517AA00878532 /* ActivityTracker.swift */; };
+		52150AF926E517DE00878532 /* Reactive.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AF826E517DE00878532 /* Reactive.swift */; };
+		52150AFB26E52D9100878532 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52150AFA26E52D9100878532 /* Double.swift */; };
 		5216070526E3B27500025196 /* CartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5216070326E3B27500025196 /* CartCell.swift */; };
 		5216070626E3B27500025196 /* CartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5216070426E3B27500025196 /* CartCell.xib */; };
 		5216070D26E3B52700025196 /* OrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5216070C26E3B52700025196 /* OrderVC.swift */; };
@@ -31,6 +39,13 @@
 		5268CB6F26E28D9900ED4DCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5268CB6D26E28D9900ED4DCE /* Main.storyboard */; };
 		5268CB7126E28D9A00ED4DCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5268CB7026E28D9A00ED4DCE /* Assets.xcassets */; };
 		5268CB7426E28D9A00ED4DCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5268CB7226E28D9A00ED4DCE /* LaunchScreen.storyboard */; };
+		527CBC3D26E3D9D80092D026 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC3C26E3D9D80092D026 /* Network.swift */; };
+		527CBC4126E3DF900092D026 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC4026E3DF900092D026 /* Menu.swift */; };
+		527CBC4426E3E2830092D026 /* menu.json in Resources */ = {isa = PBXBuildFile; fileRef = 527CBC4326E3E2830092D026 /* menu.json */; };
+		527CBC4626E3E6B40092D026 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC4526E3E6B40092D026 /* Order.swift */; };
+		527CBC4826E3E9640092D026 /* ApiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC4726E3E9640092D026 /* ApiManager.swift */; };
+		527CBC4A26E3EE660092D026 /* MenuApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC4926E3EE660092D026 /* MenuApiService.swift */; };
+		527CBC4C26E3F28B0092D026 /* ListTranfrom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC4B26E3F28B0092D026 /* ListTranfrom.swift */; };
 		52EA36AD26E29A5000D30432 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52EA36AC26E29A5000D30432 /* NSObject.swift */; };
 		52EA36BD26E29B2500D30432 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EA36B026E29B2500D30432 /* OpenSans-Italic.ttf */; };
 		52EA36BE26E29B2500D30432 /* OpenSans-CondBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52EA36B126E29B2500D30432 /* OpenSans-CondBold.ttf */; };
@@ -62,6 +77,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52150AEC26E503DB00878532 /* BaseResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseResponse.swift; sourceTree = "<group>"; };
+		52150AEE26E50EB000878532 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
+		52150AF026E50EB700878532 /* MenuRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuRouter.swift; sourceTree = "<group>"; };
+		52150AF226E50EC300878532 /* MenuInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuInteractor.swift; sourceTree = "<group>"; };
+		52150AF426E5179300878532 /* ErrorTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorTracker.swift; sourceTree = "<group>"; };
+		52150AF626E517AA00878532 /* ActivityTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTracker.swift; sourceTree = "<group>"; };
+		52150AF826E517DE00878532 /* Reactive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reactive.swift; sourceTree = "<group>"; };
+		52150AFA26E52D9100878532 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		5216070326E3B27500025196 /* CartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartCell.swift; sourceTree = "<group>"; };
 		5216070426E3B27500025196 /* CartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartCell.xib; sourceTree = "<group>"; };
 		5216070C26E3B52700025196 /* OrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderVC.swift; sourceTree = "<group>"; };
@@ -88,6 +111,13 @@
 		5268CB7026E28D9A00ED4DCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5268CB7326E28D9A00ED4DCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5268CB7526E28D9A00ED4DCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		527CBC3C26E3D9D80092D026 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		527CBC4026E3DF900092D026 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		527CBC4326E3E2830092D026 /* menu.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = menu.json; sourceTree = "<group>"; };
+		527CBC4526E3E6B40092D026 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		527CBC4726E3E9640092D026 /* ApiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiManager.swift; sourceTree = "<group>"; };
+		527CBC4926E3EE660092D026 /* MenuApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuApiService.swift; sourceTree = "<group>"; };
+		527CBC4B26E3F28B0092D026 /* ListTranfrom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTranfrom.swift; sourceTree = "<group>"; };
 		52EA36AC26E29A5000D30432 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		52EA36B026E29B2500D30432 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
 		52EA36B126E29B2500D30432 /* OpenSans-CondBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-CondBold.ttf"; sourceTree = "<group>"; };
@@ -225,6 +255,8 @@
 		5268CB6626E28D9900ED4DCE /* FoodDeliveryApp */ = {
 			isa = PBXGroup;
 			children = (
+				527CBC3E26E3DF720092D026 /* Entities */,
+				527CBC3B26E3D9C90092D026 /* Network */,
 				52EA36D426E2A41400D30432 /* Utilities */,
 				52EA36D026E2A32400D30432 /* Scenes */,
 				52EA36AE26E29B0C00D30432 /* Resources */,
@@ -238,9 +270,48 @@
 			path = FoodDeliveryApp;
 			sourceTree = "<group>";
 		};
+		527CBC3B26E3D9C90092D026 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				527CBC3C26E3D9D80092D026 /* Network.swift */,
+				527CBC4726E3E9640092D026 /* ApiManager.swift */,
+				527CBC4926E3EE660092D026 /* MenuApiService.swift */,
+				52150AF426E5179300878532 /* ErrorTracker.swift */,
+				52150AF626E517AA00878532 /* ActivityTracker.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		527CBC3E26E3DF720092D026 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				527CBC3F26E3DF7A0092D026 /* Menu */,
+				52150AEC26E503DB00878532 /* BaseResponse.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		527CBC3F26E3DF7A0092D026 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				527CBC4026E3DF900092D026 /* Menu.swift */,
+				527CBC4526E3E6B40092D026 /* Order.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
+		527CBC4226E3E25B0092D026 /* DummyResponses */ = {
+			isa = PBXGroup;
+			children = (
+				527CBC4326E3E2830092D026 /* menu.json */,
+			);
+			path = DummyResponses;
+			sourceTree = "<group>";
+		};
 		52EA36AE26E29B0C00D30432 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				527CBC4226E3E25B0092D026 /* DummyResponses */,
 				52EA36AF26E29B1200D30432 /* Fonts */,
 			);
 			path = Resources;
@@ -284,6 +355,9 @@
 			isa = PBXGroup;
 			children = (
 				52EA36D226E2A33A00D30432 /* MenuVC.swift */,
+				52150AEE26E50EB000878532 /* MenuPresenter.swift */,
+				52150AF026E50EB700878532 /* MenuRouter.swift */,
+				52150AF226E50EC300878532 /* MenuInteractor.swift */,
 			);
 			path = Menu;
 			sourceTree = "<group>";
@@ -296,6 +370,7 @@
 				52EA36DD26E2ACAD00D30432 /* Font.swift */,
 				52EA36DF26E2B56900D30432 /* Color.swift */,
 				522FB21B26E32BB00031F67A /* Constants.swift */,
+				527CBC4B26E3F28B0092D026 /* ListTranfrom.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -349,6 +424,8 @@
 				52EA36CC26E29F2800D30432 /* Optional.swift */,
 				52EA36CE26E29F4E00D30432 /* UIView.swift */,
 				52EA36E126E2B8BB00D30432 /* UIViewController.swift */,
+				52150AF826E517DE00878532 /* Reactive.swift */,
+				52150AFA26E52D9100878532 /* Double.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -437,6 +514,7 @@
 				5216071926E3B79200025196 /* Order.storyboard in Resources */,
 				52EA36C126E29B2500D30432 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				5268CB7126E28D9A00ED4DCE /* Assets.xcassets in Resources */,
+				527CBC4426E3E2830092D026 /* menu.json in Resources */,
 				52EA36C826E29B2500D30432 /* OpenSans-LightItalic.ttf in Resources */,
 				52F8486026E298E40021DC8B /* MenuCell.xib in Resources */,
 				5216071526E3B5CE00025196 /* Cart.storyboard in Resources */,
@@ -504,14 +582,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				527CBC4826E3E9640092D026 /* ApiManager.swift in Sources */,
 				52EA36CF26E29F4E00D30432 /* UIView.swift in Sources */,
 				5216070526E3B27500025196 /* CartCell.swift in Sources */,
 				5216071C26E3B9E500025196 /* CartContainerVC.swift in Sources */,
 				5216071126E3B54100025196 /* CartVC.swift in Sources */,
+				52150AF326E50EC300878532 /* MenuInteractor.swift in Sources */,
 				5216070D26E3B52700025196 /* OrderVC.swift in Sources */,
+				527CBC3D26E3D9D80092D026 /* Network.swift in Sources */,
 				5268CB6C26E28D9900ED4DCE /* ViewController.swift in Sources */,
 				522FB22526E347370031F67A /* MenuFilterCell.swift in Sources */,
 				52EA36CB26E29E9D00D30432 /* CALayer.swift in Sources */,
+				527CBC4626E3E6B40092D026 /* Order.swift in Sources */,
 				52EA36D626E2A42D00D30432 /* MenuFloatingPanelController.swift in Sources */,
 				522FB22226E342C70031F67A /* FloatingButton.swift in Sources */,
 				52EA36D826E2A56900D30432 /* AppStoryboard.swift in Sources */,
@@ -521,17 +603,27 @@
 				52EA36E226E2B8BB00D30432 /* UIViewController.swift in Sources */,
 				5216071F26E3C1F700025196 /* CartFooterCell.swift in Sources */,
 				5216071326E3B57E00025196 /* HomeRouter.swift in Sources */,
+				527CBC4C26E3F28B0092D026 /* ListTranfrom.swift in Sources */,
 				5216070F26E3B53200025196 /* InformationVC.swift in Sources */,
 				52F8485726E295930021DC8B /* HomeVC.swift in Sources */,
 				5216072226E3C66A00025196 /* BaseVC.swift in Sources */,
+				527CBC4A26E3EE660092D026 /* MenuApiService.swift in Sources */,
+				52150AED26E503DB00878532 /* BaseResponse.swift in Sources */,
 				52EA36D326E2A33A00D30432 /* MenuVC.swift in Sources */,
 				52EA36AD26E29A5000D30432 /* NSObject.swift in Sources */,
+				52150AF126E50EB700878532 /* MenuRouter.swift in Sources */,
 				52EA36DE26E2ACAD00D30432 /* Font.swift in Sources */,
+				52150AF526E5179300878532 /* ErrorTracker.swift in Sources */,
+				527CBC4126E3DF900092D026 /* Menu.swift in Sources */,
+				52150AF726E517AA00878532 /* ActivityTracker.swift in Sources */,
+				52150AFB26E52D9100878532 /* Double.swift in Sources */,
+				52150AF926E517DE00878532 /* Reactive.swift in Sources */,
 				5268CB6826E28D9900ED4DCE /* AppDelegate.swift in Sources */,
 				5268CB6A26E28D9900ED4DCE /* SceneDelegate.swift in Sources */,
 				522FB21E26E341140031F67A /* SwipePageVC.swift in Sources */,
 				52F8486326E2998A0021DC8B /* UITableView.swift in Sources */,
 				522FB21C26E32BB00031F67A /* Constants.swift in Sources */,
+				52150AEF26E50EB000878532 /* MenuPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

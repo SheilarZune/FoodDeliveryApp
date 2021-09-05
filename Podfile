@@ -14,5 +14,7 @@ pod 'FloatingPanel', '2.4.0'
 pod 'XLPagerTabStrip', '9.0.0'
 pod 'SwiftHEXColors', '1.4.1'
 pod 'TagListView', '1.4.1'
+pod 'MBProgressHUD', '1.2.0'
+pod 'SkeletonView', '1.24.4'
 
 end

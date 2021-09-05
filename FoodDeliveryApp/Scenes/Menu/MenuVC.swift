@@ -7,6 +7,7 @@
 
 import UIKit
 import XLPagerTabStrip
+import RxSwift
 
 enum MenuCategory {
     case pizza
@@ -32,6 +33,8 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     @IBOutlet weak var tblMenu: UITableView!
     
     private var category: MenuCategory = .pizza
+    private var presenter: MenuPresenter!
+    private let bag = DisposeBag()
     
     static func create(category: MenuCategory) -> MenuVC {
         let vc = MenuVC.screen()
@@ -39,15 +42,51 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
         return vc
     }
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+   
     override func viewDidLoad() {
         super.viewDidLoad()
+        setup()
         setupView()
+        setupBindings()
+        presenter.inputs.fetchMenusTrigger.onNext(category)
+    }
+    
+    private func setup() {
+        let interactor = MenuInteractor()
+        let router = MenuRouter()
+        presenter = MenuPresenter(dependencies: (interactor: interactor, router: router))
     }
     
     private func setupView() {
         tblMenu.dataSource = self
         tblMenu.delegate = self
         tblMenu.register(nibs: [MenuFilterCell.className, MenuCell.className])
+    }
+    
+    private func setupBindings() {
+        presenter?.outputs.menus
+            .bind(onNext: { [weak self] menus in
+                print("menus: \(menus.count)")
+                self?.tblMenu.reloadData()
+            })
+            .disposed(by: bag)
+        
+        presenter?.outputs.error
+            .bind(to: rx.error)
+            .disposed(by: bag)
+        
+        presenter?.outputs.loading
+            .bind(to: rx.loading)
+            .disposed(by: bag)
     }
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -62,16 +101,18 @@ extension MenuVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 10
+        return section == 0 ? 1 : presenter.outputs.menus.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
             let cell = tableView.deque(MenuFilterCell.self)
+            
             return cell
         default:
             let cell = tableView.deque(MenuCell.self)
+            cell.menu.onNext(presenter.outputs.menus.value[indexPath.row])
             return cell
         }
     }
