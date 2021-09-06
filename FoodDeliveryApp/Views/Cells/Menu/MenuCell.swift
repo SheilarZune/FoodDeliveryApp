@@ -23,16 +23,35 @@ class MenuCell: UITableViewCell {
     @IBOutlet weak var cardView: UIView!
    
     let bag = DisposeBag()
-    let menu: PublishSubject<Menu> = .init()
+    var menu: Menu? {
+        didSet {
+            guard let menu = menu else {
+                return
+            }
+            imgMenu.image = UIImage(named: menu.image.orEmpty)
+            lblMenuName.text = menu.menu
+            lblDesc.text = menu.desc
+            lblSize.text = menu.size
+            btnPrice.setTitle(menu.priceFormattedText, for: .normal)
+            hideSkeleton()
+        }
+    }
     
     weak var delegate: MenuCellDelegate?
+    
+    public override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        showSkeleton()
+    }
+    
+    public override func prepareForReuse() {
+        super.prepareForReuse()
+        menu = nil
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()
-        // show menu data
-        menu.bind(to: rx.showMenuData)
-            .disposed(by: bag)
     }
 
     func setupView() {
@@ -54,16 +73,19 @@ class MenuCell: UITableViewCell {
             })
         })
     }
-}
-
-extension Reactive where Base: MenuCell {
-    var showMenuData: Binder<Menu> {
-        return Binder(base) { cell, menu  in
-            cell.imgMenu.image = UIImage(named: menu.image.orEmpty)
-            cell.lblMenuName.text = menu.menu
-            cell.lblDesc.text = menu.desc
-            cell.lblSize.text = menu.size
-            cell.btnPrice.setTitle(menu.priceFormattedText, for: .normal)
+    
+    private func showSkeleton() {
+        if menu == nil {
+            cardView.subviews.forEach { view in
+                view.isSkeletonable = true
+                view.showAnimatedGradientSkeleton()
+            }
+        }
+    }
+    
+    private func hideSkeleton() {
+        cardView.subviews.forEach { view in
+            view.hideSkeleton()
         }
     }
 }

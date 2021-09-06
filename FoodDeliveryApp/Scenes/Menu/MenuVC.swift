@@ -8,6 +8,7 @@
 import UIKit
 import XLPagerTabStrip
 import RxSwift
+import SkeletonView
 
 enum MenuCategory {
     case pizza
@@ -70,13 +71,14 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
         tblMenu.dataSource = self
         tblMenu.delegate = self
         tblMenu.register(nibs: [MenuFilterCell.className, MenuCell.className])
+        tblMenu.isSkeletonable = true
     }
     
     private func setupBindings() {
         presenter?.outputs.menus
             .bind(onNext: { [weak self] menus in
-                print("menus: \(menus.count)")
-                self?.tblMenu.reloadData()
+                
+                self?.tblMenu.hideSkeleton()
             })
             .disposed(by: bag)
         
@@ -85,7 +87,13 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
             .disposed(by: bag)
         
         presenter?.outputs.loading
-            .bind(to: rx.loading)
+            .bind(onNext: { [weak self] isLoading in
+                if isLoading {
+                    self?.tblMenu.showAnimatedGradientSkeleton()
+                } else {
+                    self?.tblMenu.reloadData()
+                }
+            })
             .disposed(by: bag)
     }
 
@@ -94,7 +102,19 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     }
 }
 
-extension MenuVC: UITableViewDataSource, UITableViewDelegate {
+extension MenuVC: UITableViewDataSource, UITableViewDelegate, SkeletonTableViewDataSource {
+    
+    func numSections(in collectionSkeletonView: UITableView) -> Int {
+        return 2
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return section == 0 ? 1 : 5
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return MenuCell.className
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -108,11 +128,10 @@ extension MenuVC: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.section {
         case 0:
             let cell = tableView.deque(MenuFilterCell.self)
-            
             return cell
         default:
             let cell = tableView.deque(MenuCell.self)
-            cell.menu.onNext(presenter.outputs.menus.value[indexPath.row])
+            cell.menu = presenter.outputs.menus.value[indexPath.row]
             return cell
         }
     }
