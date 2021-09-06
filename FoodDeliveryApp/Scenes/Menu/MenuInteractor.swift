@@ -16,10 +16,12 @@ protocol MenuInteractorLogic  {
 
 protocol MenuInteractorInput {
     var fetchMenus: PublishSubject<MenuCategory> { get }
+    var addMenu: PublishSubject<Menu> { get }
 }
 
 protocol MenuInteractorOutput {
     var responseMenus: Driver<[Menu]> { get }
+    var responseOrders: Driver<[OrderItem]> { get }
     var responseError: Driver<APIError> { get }
     var responseLoading: Driver<Bool> { get }
 }
@@ -30,12 +32,17 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
     var outputs: MenuInteractorOutput { return self }
     // Input
     let fetchMenus: PublishSubject<MenuCategory> = .init()
+    let addMenu: PublishSubject<Menu> = .init()
     // Output
     let responseMenus: Driver<[Menu]>
+    let responseOrders: Driver<[OrderItem]>
     let responseError: Driver<APIError>
     let responseLoading: Driver<Bool>
     
     var presenter: MenuPresenterLogic?
+    
+    private let bag = DisposeBag()
+    private let currentOrderItems: PublishSubject<[OrderItem]> = .init()
     
     init() {
         let errorTracker = ErrorTracker()
@@ -70,5 +77,33 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
             .map { $0.toAPIError() }
         
         responseLoading = activityTracker.asDriver()
+        
+        // Add Menu
+        let addMenuEvent = addMenu.withLatestFrom(
+            Observable.combineLatest(addMenu, currentOrderItems.startWith([]))
+        )
+        
+        responseOrders = addMenuEvent
+            .flatMap { (menu, orderItems) -> Observable<[OrderItem]> in
+                var newOrderItems: [OrderItem] =  orderItems
+                if orderItems.contains(where: { $0.menu.id == menu.id }) {
+                    newOrderItems.enumerated().forEach { index, orderItem in
+                        if orderItem.menu.id == menu.id {
+                            newOrderItems[index].qty += 1
+                        }
+                    }
+                } else {
+                    newOrderItems.append(OrderItem(menu: menu))
+                }
+                return Observable.just(newOrderItems)
+            }
+            .asDriver(onErrorJustReturn: [])
+        
+        responseOrders
+            .drive { orderItems in
+                self.currentOrderItems.onNext(orderItems)
+                print("Order Items: \(orderItems.count)")
+            }
+            .disposed(by: bag)
     }
 }

@@ -10,7 +10,7 @@ import RxSwift
 import RxCocoa
 
 protocol MenuCellDelegate: AnyObject {
-    
+    func add(menu: Menu, of cell: MenuCell)
 }
 
 class MenuCell: UITableViewCell {
@@ -71,13 +71,17 @@ class MenuCell: UITableViewCell {
     @objc func btnPriceTapped(_ sender: UIButton) {
         // animate price button
         let originalText = sender.title(for: .normal).orEmpty
-        UIView.animate(withDuration: 0.8, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             sender.backgroundColor = .green
             sender.setTitle("added + 1", for: .normal)
         }, completion: { _ in
-            UIView.animate(withDuration: 0.4, animations: {
+            UIView.animate(withDuration: 0.2, animations: {
                 sender.backgroundColor = .black
                 sender.setTitle(originalText, for: .normal)
+            }, completion: { [weak self] _ in
+                if let strongSelf = self, let menu = strongSelf.menu {
+                    strongSelf.delegate?.add(menu: menu, of: strongSelf)
+                }
             })
         })
     }

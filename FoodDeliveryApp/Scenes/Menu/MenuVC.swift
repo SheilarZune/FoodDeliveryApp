@@ -37,6 +37,8 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     private var presenter: MenuPresenter!
     private let bag = DisposeBag()
     
+    var orderCount: BehaviorSubject<Int> = .init(value: 0)
+    
     static func create(category: MenuCategory) -> MenuVC {
         let vc = MenuVC.screen()
         vc.category = category
@@ -85,6 +87,13 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
                 }
             })
             .disposed(by: bag)
+        
+        // add menu order count
+        presenter.outputs.orderItems
+            .mapMany({ $0.qty })
+            .map({ $0.reduce(0, +) })
+            .bind(to: orderCount)
+            .disposed(by: bag)
     }
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -117,10 +126,18 @@ extension MenuVC: UITableViewDataSource, UITableViewDelegate, SkeletonTableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.deque(MenuCell.self)
         cell.menu = presenter.outputs.menus.value[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+}
+
+extension MenuVC: MenuCellDelegate {
+    
+    func add(menu: Menu, of cell: MenuCell) {
+        presenter.inputs.addMenuTrigger.onNext(menu)
     }
 }

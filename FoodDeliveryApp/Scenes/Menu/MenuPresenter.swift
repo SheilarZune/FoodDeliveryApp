@@ -14,11 +14,13 @@ typealias MenuPresenterDependencies = (
 )
 
 protocol MenuPresenterInput {
+    var addMenuTrigger: PublishSubject<Menu> { get }
     var fetchMenusTrigger: PublishSubject<MenuCategory> { get }
 }
 
 protocol MenuPresenterOutput{
     var menus: BehaviorRelay<[Menu]> { get }
+    var orderItems: BehaviorRelay<[OrderItem]> { get }
     var error: PublishSubject<APIError> { get }
     var loading: PublishSubject<Bool> { get }
 }
@@ -30,9 +32,11 @@ protocol MenuPresenterLogic {
 
 class MenuPresenter: MenuPresenterLogic, MenuPresenterInput, MenuPresenterOutput {
     // Input
+    let addMenuTrigger: PublishSubject<Menu> = .init()
     let fetchMenusTrigger: PublishSubject<MenuCategory> = .init()
     // Output
     let menus: BehaviorRelay<[Menu]> = .init(value: [])
+    let orderItems: BehaviorRelay<[OrderItem]> = .init(value: [])
     let error: PublishSubject<APIError> = .init()
     let loading: PublishSubject<Bool> = .init()
     
@@ -51,6 +55,10 @@ class MenuPresenter: MenuPresenterLogic, MenuPresenterInput, MenuPresenterOutput
             .bind(to: dependencies.interactor.inputs.fetchMenus)
             .disposed(by: bag)
         
+        addMenuTrigger.bind(to: dependencies.interactor.inputs.addMenu)
+            .disposed(by: bag)
+        
+        
         // output from interactor and bind it to presenter
         dependencies.interactor.outputs.responseMenus
             .drive(self.menus)
@@ -62,6 +70,10 @@ class MenuPresenter: MenuPresenterLogic, MenuPresenterInput, MenuPresenterOutput
         
         dependencies.interactor.outputs.responseLoading
             .drive(self.loading)
+            .disposed(by: bag)
+        
+        dependencies.interactor.outputs.responseOrders
+            .drive(self.orderItems)
             .disposed(by: bag)
     }
 }

@@ -18,5 +18,13 @@ class PlaceOrderRequest: Mappable {
     }
 }
 
-
+class OrderItem {
+    var menu: Menu
+    var qty: Int
+    
+    init(menu: Menu, qty: Int = 1) {
+        self.menu = menu
+        self.qty = qty
+    }
+}
 

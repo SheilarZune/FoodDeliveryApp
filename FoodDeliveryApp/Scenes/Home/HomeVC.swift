@@ -55,6 +55,10 @@ class HomeVC: BaseVC {
         let sushiVC = MenuVC.create(category: .sushi)
         let drinksVC = MenuVC.create(category: .drinks)
         
+        pizzaVC.orderCount.map({ String($0) })
+            .bind(to: lblCartItemCount.rx.text)
+            .disposed(by: bag)
+        
         pageVC.childs = [pizzaVC, sushiVC, drinksVC]
         pageVC.buttonBarHeight = 80
         pageVC.hasFilterViewIncluded = true
