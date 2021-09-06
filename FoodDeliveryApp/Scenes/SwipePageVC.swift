@@ -36,7 +36,7 @@ class SwipePageVC: ButtonBarPagerTabStripViewController {
         case .top:
             buttonBarView.frame = .init(x: 0, y: 0, width: view.frame.width, height: buttonBarView.frame.height - 28)
         case .bottom:
-            buttonBarView.frame = .init(x: 0, y: 28, width: view.frame.width, height: buttonBarView.frame.height - 28)
+            buttonBarView.frame = .init(x: 0, y: 42, width: view.frame.width, height: buttonBarView.frame.height - 42)
         case .center:
             buttonBarView.frame = .init(x: 0, y: 0, width: view.frame.width, height: buttonBarView.frame.height)
         }

@@ -42,16 +42,6 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
         vc.category = category
         return vc
     }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        setup()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setup()
-    }
    
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,8 +67,8 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     private func setupBindings() {
         presenter?.outputs.menus
             .bind(onNext: { [weak self] menus in
-                
-                self?.tblMenu.hideSkeleton()
+                print("menus: \(menus.count)")
+                self?.tblMenu.reloadData()
             })
             .disposed(by: bag)
         
@@ -91,7 +81,7 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
                 if isLoading {
                     self?.tblMenu.showAnimatedGradientSkeleton()
                 } else {
-                    self?.tblMenu.reloadData()
+                    self?.tblMenu.hideSkeleton()
                 }
             })
             .disposed(by: bag)

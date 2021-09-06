@@ -15,26 +15,37 @@ enum Environment {
     var baseDomain: String {
         switch self {
         case .production:
-            return "https://production-jsonkeeper.com" // demo url
+            return "https://production-jsonkeeper.com" // example url
         case .uat:
-            return "https://uat-jsonkeeper.com" // demo url
+            return "https://uat-jsonkeeper.com" // example url
         case .dev:
             return "https://jsonkeeper.com"
+        }
+    }
+    
+    // real api service for uat, production environments
+    // mock for dev environment
+    var menuApiService: MenuApiServiceLogic {
+        switch self {
+        case .production, .uat:
+            return MenuApiService.shared
+        case .dev:
+            return MenuApiService.shared
         }
     }
 }
 
 enum ApiService {
-    case getMenus
+    case getPizzaMenus
+    case getSushiMenus
+    case getDrinkMenus
     case placeOrder(request: PlaceOrderRequest) // demo purpose
-    
-    static let environment: Environment = .dev
 }
 
 extension ApiService: TargetType {
     
     var baseURL: URL {
-        guard let url = URL(string: ApiService.environment.baseDomain) else {
+        guard let url = URL(string: Current.baseDomain) else {
             fatalError("Base url could not be configured.")
         }
         return url
@@ -42,8 +53,12 @@ extension ApiService: TargetType {
     
     var path: String {
         switch self {
-        case .getMenus:
+        case .getPizzaMenus:
             return "/b/OGG1"
+        case .getSushiMenus:
+            return "/b/OGG4"
+        case .getDrinkMenus:
+            return "/b/OHRJ"
         case .placeOrder:
             return "/placeOrder"
         }
@@ -51,7 +66,7 @@ extension ApiService: TargetType {
     
     var method: Method {
         switch self {
-        case .getMenus:
+        case .getPizzaMenus, .getSushiMenus, .getDrinkMenus:
             return .get
         case .placeOrder:
             return .post
@@ -60,8 +75,12 @@ extension ApiService: TargetType {
     
     var sampleData: Data {
         switch self {
-        case .getMenus:
-            return getMockResponseData(filename: "menu").orElse(Data())
+        case .getPizzaMenus:
+            return getMockResponseData(filename: "pizza").orElse(Data())
+        case .getSushiMenus:
+            return getMockResponseData(filename: "sushi").orElse(Data())
+        case .getDrinkMenus:
+            return getMockResponseData(filename: "drink").orElse(Data())
         case .placeOrder:
             return Data()
         }
@@ -69,7 +88,7 @@ extension ApiService: TargetType {
     
     var task: Task {
         switch self {
-        case .getMenus:
+        case .getPizzaMenus, .getSushiMenus, .getDrinkMenus:
             return .requestParameters(parameters: [:], encoding: URLEncoding.queryString)
         case .placeOrder(let request):
             return .requestParameters(parameters: request.toJSON(), encoding: JSONEncoding.default)

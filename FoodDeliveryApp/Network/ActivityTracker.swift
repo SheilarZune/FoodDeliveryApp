@@ -16,6 +16,8 @@ class ActivityTracker {
         loadingSubject.onNext(true)
         return source.asObservable().do(onNext: { _ in
             self.loadingSubject.onNext(false)
+        }, onError: { _ in
+            self.loadingSubject.onNext(false)
         })
     }
     

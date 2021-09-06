@@ -7,45 +7,131 @@
 
 import ObjectMapper
 
-class MenuResponse: Mappable {
-    var status: String?
-    var data: [Menu]?
+class PizzaMenuResponse: BaseResponse {
+    var data: [PizzaMenu]?
    
-    required init?(map: Map) {
-    }
-
-    func mapping(map: Map) {
-        status      <- map["status"]
+    override func mapping(map: Map) {
+        super.mapping(map: map)
         data        <- map["data"]
     }
 }
 
-class Menu: Mappable {
+protocol Menu: Mappable  {
+    var id: Int? { get }
+    var menu: String? { get }
+    var desc: String? { get }
+    var price: Double? { get }
+    var currency: String? { get }
+    var image: String? { get }
+    func getFormattedPriceText() -> String
+}
+
+class PizzaMenu: Menu {
     var id: Int?
     var menu: String?
     var desc: String?
-    var weight: String?
-    var size: String?
     var price: Double?
     var currency: String?
     var image: String?
     
+    var weight: String?
+    var size: String?
+
     required init?(map: Map) {
     }
-
+    
     func mapping(map: Map) {
         id          <- map["id"]
         menu        <- map["menu"]
         desc        <- map["desc"]
-        weight      <- map["weight"]
-        size        <- map["size"]
         price       <- map["price"]
         currency    <- map["currency"]
         image       <- map["image"]
+        weight      <- map["weight"]
+        size        <- map["size"]
     }
     
-    var priceFormattedText: String {
+    func getFormattedPriceText() -> String {
         return price.orZero.toCurrency().orEmpty + " " + currency.orEmpty
     }
 }
 
+
+
+// Sushi
+
+class SushiMenuResponse: BaseResponse {
+    var data: [SushiMenu]?
+   
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        data        <- map["data"]
+    }
+}
+
+class SushiMenu: Menu {
+    var id: Int?
+    var menu: String?
+    var desc: String?
+    var price: Double?
+    var currency: String?
+    var image: String?
+    
+    var piece: String?
+
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        id          <- map["id"]
+        menu        <- map["menu"]
+        desc        <- map["desc"]
+        price       <- map["price"]
+        currency    <- map["currency"]
+        image       <- map["image"]
+        piece       <- map["piece"]
+    }
+    
+    func getFormattedPriceText() -> String {
+        return price.orZero.toCurrency().orEmpty + " " + currency.orEmpty
+    }
+}
+
+// Drinks
+
+class DrinkMenuResponse: BaseResponse {
+    var data: [DrinkMenu]?
+   
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        data        <- map["data"]
+    }
+}
+
+class DrinkMenu: Menu {
+    var id: Int?
+    var menu: String?
+    var desc: String?
+    var price: Double?
+    var currency: String?
+    var image: String?
+    
+    var size: String?
+
+    required init?(map: Map) {
+    }
+    
+    func mapping(map: Map) {
+        id          <- map["id"]
+        menu        <- map["menu"]
+        desc        <- map["desc"]
+        price       <- map["price"]
+        currency    <- map["currency"]
+        image       <- map["image"]
+        size        <- map["size"]
+    }
+    
+    func getFormattedPriceText() -> String {
+        return price.orZero.toCurrency().orEmpty + " " + currency.orEmpty
+    }
+}

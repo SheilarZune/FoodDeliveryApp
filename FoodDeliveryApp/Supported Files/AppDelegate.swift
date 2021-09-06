@@ -7,6 +7,16 @@
 
 import UIKit
 
+// set environment based on target scheme
+
+//#if DEV
+//var Current = Environment.dev
+//#else
+//var Current = Environment.uat
+//#endif
+
+var Current = Environment.dev
+
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

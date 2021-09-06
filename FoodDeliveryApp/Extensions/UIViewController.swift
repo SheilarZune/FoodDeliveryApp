@@ -41,7 +41,7 @@ extension Reactive where Base: UIViewController {
     
     var error: Binder<APIError> {
         return Binder(base) { vc, error in
-            vc.showAlert(title: "Error", message: error.message())
+            vc.showAlert(title: "Error", message: error.description)
         }
     }
     

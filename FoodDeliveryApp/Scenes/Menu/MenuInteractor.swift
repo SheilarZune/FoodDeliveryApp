@@ -28,8 +28,9 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
     
     var inputs: MenuInteractorInput { return self }
     var outputs: MenuInteractorOutput { return self }
-    
+    // Input
     let fetchMenus: PublishSubject<MenuCategory> = .init()
+    // Output
     let responseMenus: Driver<[Menu]>
     let responseError: Driver<APIError>
     let responseLoading: Driver<Bool>
@@ -40,19 +41,31 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
         let errorTracker = ErrorTracker()
         let activityTracker = ActivityTracker()
         
-        let response = self.fetchMenus
-            .flatMapLatest {
-                MenuApiService.shared
-                    .getMenus(category: $0)
-                    .materialize()
-                    .track(error: errorTracker)
-                    .track(loading: activityTracker)
+        let menuResponse = fetchMenus
+            .flatMap { category -> Observable<[Menu]> in
+                switch category {
+                case .pizza:
+                    return Current.menuApiService
+                        .getPizzaMenus()
+                        .map({ $0.data.orElse([]) })
+                        .track(loading: activityTracker, error: errorTracker)
+                case .sushi:
+                    return Current.menuApiService
+                        .getSushiMenus()
+                        .map({ $0.data.orElse([]) })
+                        .track(loading: activityTracker, error: errorTracker)
+                case .drinks:
+                    return Current.menuApiService
+                        .getDrinkMenus()
+                        .map({ $0.data.orElse([]) })
+                        .track(loading: activityTracker, error: errorTracker)
+                }
             }
-            .share()
-        
-        responseMenus = response.map({ $0.element?.data ?? [] })
+     
+        responseMenus = menuResponse.materialize()
+            .elements()
             .asDriver(onErrorJustReturn: [])
-        
+
         responseError = errorTracker.asDriver()
             .map { $0.toAPIError() }
         

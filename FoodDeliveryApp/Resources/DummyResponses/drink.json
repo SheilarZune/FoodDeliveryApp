@@ -1,0 +1,32 @@
+{
+    "status": "SUCCESS",
+    "data": [
+    {
+        "id": 1,
+        "menu": "Coffee",
+        "desc": "Coffee is considered by many to be the most popular hot beverage in the world. Millions of people start off their day with a cup of joe, and it’s not surprising, considering the strong effect it can have on improving productivity and focus.",
+        "size": "Medium",
+        "price": 14,
+        "currency": "USD",
+        "image": "coffee"
+    },
+    {
+        "id": 2,
+        "menu": "Tea",
+        "desc": "Tea has been around almost as long as civilization—it was discovered nearly 5,000 years ago in ancient China. ",
+        "size": "Small",
+        "price": 10,
+        "currency": "USD",
+        "image": "tea"
+    },
+    {
+        "id": 3,
+        "menu": "Coca-Cola",
+        "desc": "Although Coca-Cola doesn’t fall into the traditional category of types of drinks because it’s actually a specific brand, the sheer amount that is consumed each year warrants inclusion on the most popular beverage in the world list.",
+        "size": "Normal",
+        "price": 4,
+        "currency": "USD",
+        "image": "coke"
+    }
+]
+}

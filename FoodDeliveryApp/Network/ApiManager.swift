@@ -9,21 +9,32 @@ import Moya
 import RxSwift
 import ObjectMapper
 
-enum APIError: Error {
+enum APIError: Error, CustomStringConvertible {
     case serverError
     case unknown
     case forwarded(Error)
+    
+    var description: String {
+        switch self {
+        case .serverError:
+            return "Server Error!"
+        case .unknown:
+            return "Something went wrong!"
+        case .forwarded(let error):
+            return error.localizedDescription
+        }
+    }
 }
 
 class ApiManager<P: TargetType> {
     
     private let provider: MoyaProvider<P>
     
-    init() {
-        self.provider = MoyaProvider<P>()
+    init(provider: MoyaProvider<P>) {
+        self.provider = provider
     }
     
-    func request<T: Mappable>(_ Type: T.Type, _ service: P) -> Observable<T> {
+    func request<T: BaseResponse>(_ Type: T.Type, _ service: P) -> Observable<T> {
         return Observable.create { observer in
             self.provider.request(service) { result in
                 switch result {
@@ -31,7 +42,11 @@ class ApiManager<P: TargetType> {
                     do {
                         let json = try JSONSerialization.jsonObject(with: response.data, options: .allowFragments) as? [String: Any]
                         if let data = Mapper<T>().map(JSON: json.orElse([:])) {
-                            observer.onNext(data)
+                            if data.isSuccess() {
+                                observer.onNext(data)
+                            } else {
+                                observer.onError(APIError.serverError)
+                            }
                         } else {
                             observer.onError(APIError.unknown)
                         }

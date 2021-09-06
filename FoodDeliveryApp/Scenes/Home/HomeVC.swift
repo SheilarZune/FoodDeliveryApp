@@ -56,7 +56,7 @@ class HomeVC: BaseVC {
         let drinksVC = MenuVC.create(category: .drinks)
         
         pageVC.childs = [pizzaVC, sushiVC, drinksVC]
-        pageVC.buttonBarHeight = 78
+        pageVC.buttonBarHeight = 98
         pageVC.buttonBarViewAlignment = .bottom
         pageVC.customDelegate = self
         
@@ -72,9 +72,10 @@ class HomeVC: BaseVC {
         }
         
         if hasTopNotch {
-            fpc?.set(initialTopInset: containerView.frame.minY, finalTopInset: -(pageVC.buttonBarHeight - statusBarHeight))
+            // fpc?.set(initialTopInset: containerView.frame.minY, finalTopInset: -(pageVC.buttonBarHeight - statusBarHeight))
+            fpc?.set(initialTopInset: containerView.frame.minY, finalTopInset: 0)
         } else {
-            fpc?.set(initialTopInset: containerView.frame.minY - 120, finalTopInset: -(pageVC.buttonBarHeight - statusBarHeight))
+            fpc?.set(initialTopInset: containerView.frame.minY - 120, finalTopInset: 0)
         }
         
         fpc?.addPanel(toParent: self)
@@ -113,6 +114,6 @@ extension HomeVC: MenuFloatingPanelLayoutChangesDelegate {
        
         let top = initialY - y
         imageSliderTopConstraint.constant = top < 0 ? 0 : -top
-        pageVC.buttonBarView.isHidden = y > 0 ? false : true
+       // pageVC.buttonBarView.isHidden = y > 0 ? false : true
     }
 }

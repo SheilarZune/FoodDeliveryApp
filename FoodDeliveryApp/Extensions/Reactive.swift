@@ -16,17 +16,15 @@ extension Collection where Element == Bool {
 }
 
 extension ObservableConvertibleType {
-    func track(error: ErrorTracker) -> Observable<E> {
+    func track(loading: ActivityTracker, error: ErrorTracker) -> Observable<E> {
+        return loading.track(source: self).track(error: error)
+    }
+    
+    private func track(error: ErrorTracker) -> Observable<E> {
         return error.track(source: self)
     }
-    func track(loading: ActivityTracker) -> Observable<E> {
+    private func track(loading: ActivityTracker) -> Observable<E> {
         return loading.track(source: self)
-    }
-}
-
-extension Error where Self == APIError {
-    func message() -> String {
-        return self.localizedDescription // todo: - 
     }
 }
 

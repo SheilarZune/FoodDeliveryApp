@@ -31,8 +31,16 @@ class MenuCell: UITableViewCell {
             imgMenu.image = UIImage(named: menu.image.orEmpty)
             lblMenuName.text = menu.menu
             lblDesc.text = menu.desc
-            lblSize.text = menu.size
-            btnPrice.setTitle(menu.priceFormattedText, for: .normal)
+            
+            if let pizzaMenu = menu as? PizzaMenu {
+                lblSize.text = pizzaMenu.weight.orEmpty + " " + pizzaMenu.size.orEmpty
+            }
+            
+            if let drinkMenu = menu as? DrinkMenu {
+                lblSize.text = drinkMenu.size
+            }
+            
+            btnPrice.setTitle(menu.getFormattedPriceText(), for: .normal)
             hideSkeleton()
         }
     }

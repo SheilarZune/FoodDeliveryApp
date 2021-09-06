@@ -46,7 +46,8 @@ class MenuPresenter: MenuPresenterLogic, MenuPresenterInput, MenuPresenterOutput
         self.dependencies = dependencies
         
         // notify interactor to call menu api
-        fetchMenusTrigger
+        // add some delay
+        fetchMenusTrigger.debounce(.init(0.25), scheduler: MainScheduler.instance)
             .bind(to: dependencies.interactor.inputs.fetchMenus)
             .disposed(by: bag)
         
