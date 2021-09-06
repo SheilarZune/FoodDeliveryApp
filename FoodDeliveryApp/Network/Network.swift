@@ -30,7 +30,7 @@ enum Environment {
         case .production, .uat:
             return MenuApiService.shared
         case .dev:
-            return MenuApiService.shared
+            return MockMenuApiService.shared
         }
     }
 }

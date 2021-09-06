@@ -40,6 +40,9 @@
 		5268CB6F26E28D9900ED4DCE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5268CB6D26E28D9900ED4DCE /* Main.storyboard */; };
 		5268CB7126E28D9A00ED4DCE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5268CB7026E28D9A00ED4DCE /* Assets.xcassets */; };
 		5268CB7426E28D9A00ED4DCE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5268CB7226E28D9A00ED4DCE /* LaunchScreen.storyboard */; };
+		526D980A26E6083F0013F951 /* sushi.json in Resources */ = {isa = PBXBuildFile; fileRef = 526D980926E6083F0013F951 /* sushi.json */; };
+		526D980C26E60D3C0013F951 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 526D980B26E60D3C0013F951 /* FilterView.swift */; };
+		526D980E26E60D4D0013F951 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 526D980D26E60D4D0013F951 /* FilterView.xib */; };
 		527CBC3D26E3D9D80092D026 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC3C26E3D9D80092D026 /* Network.swift */; };
 		527CBC4126E3DF900092D026 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 527CBC4026E3DF900092D026 /* Menu.swift */; };
 		527CBC4426E3E2830092D026 /* pizza.json in Resources */ = {isa = PBXBuildFile; fileRef = 527CBC4326E3E2830092D026 /* pizza.json */; };
@@ -113,6 +116,9 @@
 		5268CB7026E28D9A00ED4DCE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5268CB7326E28D9A00ED4DCE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5268CB7526E28D9A00ED4DCE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		526D980926E6083F0013F951 /* sushi.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sushi.json; sourceTree = "<group>"; };
+		526D980B26E60D3C0013F951 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		526D980D26E60D4D0013F951 /* FilterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		527CBC3C26E3D9D80092D026 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		527CBC4026E3DF900092D026 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		527CBC4326E3E2830092D026 /* pizza.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = pizza.json; sourceTree = "<group>"; };
@@ -223,6 +229,8 @@
 			isa = PBXGroup;
 			children = (
 				522FB22126E342C70031F67A /* FloatingButton.swift */,
+				526D980B26E60D3C0013F951 /* FilterView.swift */,
+				526D980D26E60D4D0013F951 /* FilterView.xib */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -306,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				527CBC4326E3E2830092D026 /* pizza.json */,
+				526D980926E6083F0013F951 /* sushi.json */,
 				522E3FB726E5EC1D006FBC55 /* drink.json */,
 			);
 			path = DummyResponses;
@@ -514,6 +523,7 @@
 				5268CB7426E28D9A00ED4DCE /* LaunchScreen.storyboard in Resources */,
 				52EA36C726E29B2500D30432 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				52EA36C326E29B2500D30432 /* OpenSans-Semibold.ttf in Resources */,
+				526D980E26E60D4D0013F951 /* FilterView.xib in Resources */,
 				52EA36C526E29B2500D30432 /* OpenSans-CondLight.ttf in Resources */,
 				5216071926E3B79200025196 /* Order.storyboard in Resources */,
 				52EA36C126E29B2500D30432 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
@@ -523,6 +533,7 @@
 				52F8486026E298E40021DC8B /* MenuCell.xib in Resources */,
 				5216071526E3B5CE00025196 /* Cart.storyboard in Resources */,
 				52EA36BD26E29B2500D30432 /* OpenSans-Italic.ttf in Resources */,
+				526D980A26E6083F0013F951 /* sushi.json in Resources */,
 				5216070626E3B27500025196 /* CartCell.xib in Resources */,
 				52EA36C426E29B2500D30432 /* OpenSans-Light.ttf in Resources */,
 				52EA36BE26E29B2500D30432 /* OpenSans-CondBold.ttf in Resources */,
@@ -623,6 +634,7 @@
 				52150AFB26E52D9100878532 /* Double.swift in Sources */,
 				52150AF926E517DE00878532 /* Reactive.swift in Sources */,
 				5268CB6826E28D9900ED4DCE /* AppDelegate.swift in Sources */,
+				526D980C26E60D3C0013F951 /* FilterView.swift in Sources */,
 				5268CB6A26E28D9900ED4DCE /* SceneDelegate.swift in Sources */,
 				522FB21E26E341140031F67A /* SwipePageVC.swift in Sources */,
 				52F8486326E2998A0021DC8B /* UITableView.swift in Sources */,

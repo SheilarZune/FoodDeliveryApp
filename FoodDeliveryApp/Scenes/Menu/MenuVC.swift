@@ -60,7 +60,7 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     private func setupView() {
         tblMenu.dataSource = self
         tblMenu.delegate = self
-        tblMenu.register(nibs: [MenuFilterCell.className, MenuCell.className])
+        tblMenu.register(nib: MenuCell.className)
         tblMenu.isSkeletonable = true
     }
     
@@ -95,11 +95,11 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
 extension MenuVC: UITableViewDataSource, UITableViewDelegate, SkeletonTableViewDataSource {
     
     func numSections(in collectionSkeletonView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : 5
+        return 5
     }
     
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
@@ -107,23 +107,17 @@ extension MenuVC: UITableViewDataSource, UITableViewDelegate, SkeletonTableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? 1 : presenter.outputs.menus.value.count
+        return presenter.outputs.menus.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.deque(MenuFilterCell.self)
-            return cell
-        default:
-            let cell = tableView.deque(MenuCell.self)
-            cell.menu = presenter.outputs.menus.value[indexPath.row]
-            return cell
-        }
+        let cell = tableView.deque(MenuCell.self)
+        cell.menu = presenter.outputs.menus.value[indexPath.row]
+        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

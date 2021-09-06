@@ -56,7 +56,8 @@ class HomeVC: BaseVC {
         let drinksVC = MenuVC.create(category: .drinks)
         
         pageVC.childs = [pizzaVC, sushiVC, drinksVC]
-        pageVC.buttonBarHeight = 98
+        pageVC.buttonBarHeight = 80
+        pageVC.hasFilterViewIncluded = true
         pageVC.buttonBarViewAlignment = .bottom
         pageVC.customDelegate = self
         
@@ -87,7 +88,7 @@ class HomeVC: BaseVC {
             return
         }
         
-        imageSlideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 66))
+        imageSlideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 72))
         imageSlideShow.contentScaleMode = .scaleAspectFill
         imageSlideShow.setImageInputs([ImageSource(image: bannerImage),
                                        ImageSource(image: bannerImage),

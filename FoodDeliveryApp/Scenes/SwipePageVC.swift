@@ -24,6 +24,8 @@ class SwipePageVC: ButtonBarPagerTabStripViewController {
     var buttonBarHeight: CGFloat = 78
     var scrollView: UIScrollView?
     var buttonBarViewAlignment: ButtonBarViewAlignment = .center
+    var hasFilterViewIncluded: Bool = false
+    
     weak var customDelegate: SwipePageVCDelegate?
     
     override func viewDidLoad() {
@@ -36,11 +38,22 @@ class SwipePageVC: ButtonBarPagerTabStripViewController {
         case .top:
             buttonBarView.frame = .init(x: 0, y: 0, width: view.frame.width, height: buttonBarView.frame.height - 28)
         case .bottom:
-            buttonBarView.frame = .init(x: 0, y: 42, width: view.frame.width, height: buttonBarView.frame.height - 42)
+            buttonBarView.frame = .init(x: 0, y: 0, width: view.frame.width, height: buttonBarView.frame.height)
         case .center:
             buttonBarView.frame = .init(x: 0, y: 0, width: view.frame.width, height: buttonBarView.frame.height)
         }
         
+        if hasFilterViewIncluded {
+            setupFilterView()
+        }
+        
+    }
+    
+    private func setupFilterView() {
+        let filterView = FilterView().loadViewFromNib()
+        filterView.frame = .init(x: 0, y: buttonBarView.frame.maxY - 50,
+                                 width: self.view.frame.width, height: 50)
+        buttonBarView.addSubview(filterView)
     }
     
     private func setupView() {
@@ -53,12 +66,13 @@ class SwipePageVC: ButtonBarPagerTabStripViewController {
         
         settings.style.buttonBarMinimumLineSpacing = 0
         settings.style.buttonBarItemTitleColor = .yellow
-        settings.style.buttonBarHeight = buttonBarHeight
+        settings.style.buttonBarHeight = buttonBarHeight + (hasFilterViewIncluded ? 50 : 0)
         settings.style.buttonBarItemLeftRightMargin = 0
         
         settings.style.buttonBarItemsShouldFillAvailableWidth = true
-        settings.style.buttonBarRightContentInset = 0
-        settings.style.buttonBarLeftContentInset = -12
+        settings.style.buttonBarRightContentInset = -12
+        settings.style.buttonBarLeftContentInset = -24
+        
         
         
         changeCurrentIndexProgressive = { (oldCell: ButtonBarViewCell?, newCell: ButtonBarViewCell?, _, changeCurrentIndex: Bool, _) -> Void in

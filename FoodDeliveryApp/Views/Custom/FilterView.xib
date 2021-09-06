@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FilterView" customModule="FoodDeliveryApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="411" height="198"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cct-fz-5gB">
+                    <rect key="frame" x="0.0" y="0.0" width="411" height="56"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FILTERS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="crU-tb-pT7">
+                            <rect key="frame" x="20" y="23" width="53.5" height="16.5"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="oRg-dm-ti6"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VW9-jZ-P6A" customClass="TagListView" customModule="TagListView">
+                            <rect key="frame" x="85.5" y="16" width="305.5" height="24"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" priority="250" constant="24" id="ADA-7U-K13"/>
+                            </constraints>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                    <color key="value" name="WhiteGray"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                    <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="marginY">
+                                    <real key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="marginX">
+                                    <real key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                    <real key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                    <real key="value" value="12"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" name="WhiteGray"/>
+                    <constraints>
+                        <constraint firstItem="crU-tb-pT7" firstAttribute="centerY" secondItem="VW9-jZ-P6A" secondAttribute="centerY" constant="3" id="9lT-ek-RbB"/>
+                        <constraint firstItem="VW9-jZ-P6A" firstAttribute="leading" secondItem="crU-tb-pT7" secondAttribute="trailing" constant="12" id="Gyz-oY-RAh"/>
+                        <constraint firstAttribute="trailing" secondItem="VW9-jZ-P6A" secondAttribute="trailing" constant="20" id="IPk-MK-8pw"/>
+                        <constraint firstItem="VW9-jZ-P6A" firstAttribute="top" secondItem="cct-fz-5gB" secondAttribute="top" constant="16" id="R0P-ZN-xhS"/>
+                        <constraint firstAttribute="bottom" secondItem="VW9-jZ-P6A" secondAttribute="bottom" constant="16" id="haO-Y5-Z9N"/>
+                        <constraint firstItem="crU-tb-pT7" firstAttribute="leading" secondItem="cct-fz-5gB" secondAttribute="leading" constant="20" id="nVK-dc-SMO"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="cct-fz-5gB" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="1Gb-Jy-4Ul"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cct-fz-5gB" secondAttribute="bottom" id="Frh-Lq-hh2"/>
+                <constraint firstItem="cct-fz-5gB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="RMQ-RD-4yD"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="cct-fz-5gB" secondAttribute="trailing" id="qzd-2M-6o6"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="filterItemsView" destination="VW9-jZ-P6A" id="FWe-8t-1SA"/>
+            </connections>
+            <point key="canvasLocation" x="129.71014492753625" y="64.285714285714278"/>
+        </view>
+    </objects>
+    <designables>
+        <designable name="VW9-jZ-P6A">
+            <size key="intrinsicContentSize" width="305.5" height="24"/>
+        </designable>
+    </designables>
+    <resources>
+        <namedColor name="WhiteGray">
+            <color red="0.96078431372549022" green="0.96078431372549022" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

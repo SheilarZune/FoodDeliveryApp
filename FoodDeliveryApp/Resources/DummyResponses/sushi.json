@@ -1,0 +1,32 @@
+{
+    "status": "SUCCESS",
+    "data": [
+    {
+        "id": 1,
+        "menu": "Narezushi",
+        "desc": "Japan’s narezushi—a dish of fish preserved for several months to several years in salt and rice",
+        "piece": "8 piece",
+        "price": 14,
+        "currency": "USD",
+        "image": "narezushi"
+    },
+    {
+        "id": 2,
+        "menu": "Nigiri",
+        "desc": "Nigiri is the original form of sushi that we know today. Also called edo-mae (meaning “in front of Edo”), the name refers to its birthplace of Tokyo (formerly Edo). ",
+        "piece": "6 piece",
+        "price": 10,
+        "currency": "USD",
+        "image": "nigiri"
+    },
+    {
+        "id": 3,
+        "menu": "Oshizushi",
+        "desc": "Oshizushi (pressed sushi), also known as hakozushi (boxed sushi), is a strikingly shaped style of sushi originating in Osaka.",
+        "piece": "10 piece",
+        "price": 12,
+        "currency": "USD",
+        "image": "oshizushi"
+    }
+]
+}
