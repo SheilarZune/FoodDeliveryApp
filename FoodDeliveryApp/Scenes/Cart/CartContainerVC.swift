@@ -9,6 +9,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+struct CartContainerEntity {
+    let orderItems: [OrderItem]
+}
+
 class CartContainerVC: BaseVC, AppStoryboard {
 
     static var storyboard: Storyboard = .main
@@ -18,17 +22,19 @@ class CartContainerVC: BaseVC, AppStoryboard {
     
     private let bag = DisposeBag()
     
+    
+    let cartVC = CartVC.screen()
+    let orderVC = OrderVC.screen()
+    let infoVC = InformationVC.screen()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
     private func setupView() {
+       
         let pageVC = SwipePageVC()
-        let cartVC = CartVC.screen()
-        let orderVC = OrderVC.screen()
-        let infoVC = InformationVC.screen()
-        
         pageVC.buttonBarHeight = 45
         pageVC.buttonBarViewAlignment = .center
         pageVC.childs = [cartVC, orderVC, infoVC]

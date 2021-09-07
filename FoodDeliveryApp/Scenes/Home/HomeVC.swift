@@ -27,6 +27,24 @@ class HomeVC: BaseVC {
     private var initialY: CGFloat = 0
     private let bag = DisposeBag()
     
+    var presenter: HomePresenterLogic!
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
+    
+    private func setup() {
+        let interactor = HomeInteractor()
+        let router = HomeRouter(viewController: self)
+        presenter = HomePresenter(dependencies: (interactor: interactor, router: router))
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -43,10 +61,8 @@ class HomeVC: BaseVC {
         
         // interactions
         btnCart.rx.tap
-            .bind(onNext: {
-                let vc = CartContainerVC.screen()
-                self.navigationController?.pushViewController(vc, animated: true)
-            }).disposed(by: bag)
+            .bind(to: presenter.inputs.viewCartTrigger)
+            .disposed(by: bag)
     }
     
     private func setupFloatingPanel() {
@@ -55,9 +71,17 @@ class HomeVC: BaseVC {
         let sushiVC = MenuVC.create(category: .sushi)
         let drinksVC = MenuVC.create(category: .drinks)
         
-        pizzaVC.orderCount.map({ String($0) })
-            .bind(to: lblCartItemCount.rx.text)
-            .disposed(by: bag)
+        // Order Items
+        Observable.combineLatest(pizzaVC.presenter.orderItems.asObservable(),
+                         sushiVC.presenter.orderItems.asObservable(),
+                         drinksVC.presenter.orderItems.asObservable()).bind { [weak self] pizza, sushi, drink in
+                            let pizzaCount = pizza.map({ $0.qty }).reduce(0, +)
+                            let sushiCount = sushi.map({ $0.qty }).reduce(0, +)
+                            let drinkCount = drink.map({ $0.qty }).reduce(0, +)
+                            self?.lblCartItemCount.text = "\(pizzaCount + sushiCount + drinkCount)"
+                            self?.presenter.inputs.orderItems.onNext(pizza + sushi + drink)
+                         }
+                        .disposed(by: bag)
         
         pageVC.childs = [pizzaVC, sushiVC, drinksVC]
         pageVC.buttonBarHeight = 80

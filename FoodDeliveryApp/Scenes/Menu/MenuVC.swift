@@ -33,21 +33,28 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     
     @IBOutlet weak var tblMenu: UITableView!
     
+    var presenter: MenuPresenter!
     private var category: MenuCategory = .pizza
-    private var presenter: MenuPresenter!
     private let bag = DisposeBag()
-    
-    var orderCount: BehaviorSubject<Int> = .init(value: 0)
     
     static func create(category: MenuCategory) -> MenuVC {
         let vc = MenuVC.screen()
         vc.category = category
         return vc
     }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        setup()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setup()
+    }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        setup()
         setupView()
         setupBindings()
         presenter.inputs.fetchMenusTrigger.onNext(category)
@@ -55,7 +62,7 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     
     private func setup() {
         let interactor = MenuInteractor()
-        let router = MenuRouter()
+        let router = MenuRouter(viewController: self)
         presenter = MenuPresenter(dependencies: (interactor: interactor, router: router))
     }
     
@@ -86,13 +93,6 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
                     self?.tblMenu.hideSkeleton()
                 }
             })
-            .disposed(by: bag)
-        
-        // add menu order count
-        presenter.outputs.orderItems
-            .mapMany({ $0.qty })
-            .map({ $0.reduce(0, +) })
-            .bind(to: orderCount)
             .disposed(by: bag)
     }
 

@@ -9,6 +9,7 @@ import UIKit
 
 class CartFooterCell: UITableViewCell {
 
+    @IBOutlet weak var lblTotal: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         setupView()

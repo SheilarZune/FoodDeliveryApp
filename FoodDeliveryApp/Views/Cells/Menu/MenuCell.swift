@@ -36,6 +36,10 @@ class MenuCell: UITableViewCell {
                 lblSize.text = pizzaMenu.weight.orEmpty + " " + pizzaMenu.size.orEmpty
             }
             
+            if let sushiMenu = menu as? SushiMenu {
+                lblSize.text = sushiMenu.piece.orEmpty
+            }
+            
             if let drinkMenu = menu as? DrinkMenu {
                 lblSize.text = drinkMenu.size
             }

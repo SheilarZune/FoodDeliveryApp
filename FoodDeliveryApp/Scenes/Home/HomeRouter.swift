@@ -7,34 +7,21 @@
 
 import UIKit
 
-protocol RoutingLogic: AnyObject {
-    var viewController: UIViewController? { get set }
-    func routeBack()
+protocol HomeRouterLogic: RoutingLogic {
+    func routeToCart(entryEntity: CartContainerEntity)
 }
 
-extension RoutingLogic {
-    func routeBack() {
-        if viewController?.navigationController == nil {
-            viewController?.dismiss(animated: true, completion: nil)
-        } else {
-            viewController?.navigationController?.popViewController(animated: true)
-        }
-    }
-}
-
-protocol HomeRoutingLogic: RoutingLogic {
-    func routeToCart()
-}
-
-class HomeRouter: HomeRoutingLogic {
-   
+class HomeRouter: HomeRouterLogic {
+    
     var viewController: UIViewController?
     
-    func routeToCart() {
-        let pageVC = SwipePageVC()
-        let cartVC = CartVC.screen()
-        let orderVC = OrderVC.screen()
-        pageVC.childs = [cartVC, orderVC]
-        viewController?.navigationController?.pushViewController(pageVC, animated: true)
+    required init(viewController: UIViewController) {
+        self.viewController = viewController
+    }
+    
+    func routeToCart(entryEntity: CartContainerEntity) {
+        let containerVC = CartContainerVC.screen()
+        containerVC.cartVC.presenter.inputs.entryEntity.onNext(.init(orderItems: entryEntity.orderItems))
+        viewController?.navigationController?.pushViewController(containerVC, animated: true)
     }
 }
