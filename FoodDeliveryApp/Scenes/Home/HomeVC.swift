@@ -100,6 +100,8 @@ class HomeVC: BaseVC {
                     self?.sushiVC.presenter.inputs.cartUpdated.onNext(orderItems)
                 case .drinks:
                     self?.drinksVC.presenter.inputs.cartUpdated.onNext(orderItems)
+                case .unknown:
+                    break
                 }
             })
             .disposed(by: bag)

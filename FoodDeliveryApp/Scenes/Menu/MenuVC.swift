@@ -14,6 +14,7 @@ enum MenuCategory {
     case pizza
     case sushi
     case drinks
+    case unknown
     
     var tabBarTitle: String {
         switch self {
@@ -23,6 +24,8 @@ enum MenuCategory {
             return "Sushi"
         case .drinks:
             return "Drinks"
+        case .unknown:
+            return "Unknown"
         }
     }
 }

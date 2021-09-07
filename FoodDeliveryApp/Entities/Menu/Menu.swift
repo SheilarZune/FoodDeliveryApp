@@ -24,6 +24,26 @@ protocol Menu: Mappable  {
     var currency: String? { get }
     var image: String? { get }
     func getFormattedPriceText() -> String
+    func getMenuCategory() -> MenuCategory
+}
+
+extension Menu {
+    func getFormattedPriceText() -> String {
+        return price.orZero.toCurrency().orEmpty + " " + currency.orEmpty
+    }
+    
+    func getMenuCategory() -> MenuCategory {
+        switch self {
+        case is PizzaMenu:
+            return .pizza
+        case is SushiMenu:
+            return .sushi
+        case is DrinkMenu:
+            return .drinks
+        default:
+            return .unknown
+        }
+    }
 }
 
 class PizzaMenu: Menu {
@@ -49,10 +69,6 @@ class PizzaMenu: Menu {
         image       <- map["image"]
         weight      <- map["weight"]
         size        <- map["size"]
-    }
-    
-    func getFormattedPriceText() -> String {
-        return price.orZero.toCurrency().orEmpty + " " + currency.orEmpty
     }
 }
 
@@ -91,10 +107,6 @@ class SushiMenu: Menu {
         image       <- map["image"]
         piece       <- map["piece"]
     }
-    
-    func getFormattedPriceText() -> String {
-        return price.orZero.toCurrency().orEmpty + " " + currency.orEmpty
-    }
 }
 
 // Drinks
@@ -129,9 +141,5 @@ class DrinkMenu: Menu {
         currency    <- map["currency"]
         image       <- map["image"]
         size        <- map["size"]
-    }
-    
-    func getFormattedPriceText() -> String {
-        return price.orZero.toCurrency().orEmpty + " " + currency.orEmpty
     }
 }

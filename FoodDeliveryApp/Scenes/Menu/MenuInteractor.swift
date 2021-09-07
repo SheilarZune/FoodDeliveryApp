@@ -67,6 +67,8 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
                         .getDrinkMenus()
                         .map({ $0.data.orElse([]) })
                         .track(loading: activityTracker, error: errorTracker)
+                case .unknown:
+                    return Observable.just([])
                 }
             }
      
@@ -94,17 +96,7 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
                         }
                     }
                 } else {
-                    var category: MenuCategory = .pizza
-                    switch menu {
-                    case is PizzaMenu:
-                        category = .pizza
-                    case is SushiMenu:
-                        category = .sushi
-                    case is DrinkMenu:
-                        category = .drinks
-                    default: break
-                    }
-                    newOrderItems.append(OrderItem(menu: menu, category: category))
+                    newOrderItems.append(OrderItem(menu: menu, category: menu.getMenuCategory()))
                 }
                 return Observable.just(newOrderItems)
             }

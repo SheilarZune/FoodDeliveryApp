@@ -75,7 +75,7 @@ class MenuCell: UITableViewCell {
     @objc func btnPriceTapped(_ sender: UIButton) {
         // animate price button
         let originalText = sender.title(for: .normal).orEmpty
-        UIView.animate(withDuration: 0.5, animations: {
+        UIView.animate(withDuration: 0.4, animations: {
             sender.backgroundColor = .green
             sender.setTitle("added + 1", for: .normal)
         }, completion: { _ in
