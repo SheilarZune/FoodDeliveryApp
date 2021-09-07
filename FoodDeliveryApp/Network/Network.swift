@@ -16,9 +16,7 @@ enum Environment {
         switch self {
         case .production:
             return "https://production-jsonkeeper.com" // example url
-        case .uat:
-            return "https://uat-jsonkeeper.com" // example url
-        case .dev:
+        case .dev, .uat:
             return "https://jsonkeeper.com"
         }
     }

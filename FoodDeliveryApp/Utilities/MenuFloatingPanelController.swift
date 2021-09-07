@@ -32,7 +32,7 @@ public class MenuFloatingPanelController: FloatingPanelController, FloatingPanel
         surfaceView.grabberHandleSize = .zero
         surfaceView.grabberHandle.isHidden = true
         surfaceView.backgroundColor = backgroundColor
-        surfaceView.cornerRadius = 30
+        surfaceView.cornerRadius = 20
         backdropView.backgroundColor = .clear
         delegate = self
     }
@@ -53,6 +53,7 @@ public class MenuFloatingPanelController: FloatingPanelController, FloatingPanel
             fpc.surfaceLocation = CGPoint(x: loc.x, y: min(max(loc.y, minY), maxY))
         }
         layoutChangesDelegate?.floatingPanelDidMoved?(y: loc.y)
+        
     }
     
     public func floatingPanelDidChangeState(_ fpc: FloatingPanelController) {
@@ -61,6 +62,9 @@ public class MenuFloatingPanelController: FloatingPanelController, FloatingPanel
     
     public func floatingPanelDidEndAttracting(_ fpc: FloatingPanelController) {
         layoutChangesDelegate?.floatingPanelDidEndAttracting?()
+    }
+    
+    public func floatingPanelDidEndDragging(_ fpc: FloatingPanelController, willAttract attract: Bool) {
     }
     
     deinit {

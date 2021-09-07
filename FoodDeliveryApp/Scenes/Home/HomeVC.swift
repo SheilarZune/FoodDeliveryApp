@@ -85,6 +85,12 @@ class HomeVC: BaseVC {
             .bind(to: lblCartItemCount.rx.text)
             .disposed(by: bag)
         
+        presenter.outputs
+            .orderItemCount
+            .map({ $0 == 0 })
+            .bind(to: cartItemCountView.rx.isHidden)
+            .disposed(by: bag)
+        
         presenter.outputs.cartUpdated
             .bind(onNext: { [weak self] category, orderItems in
                 switch category {
@@ -127,23 +133,21 @@ class HomeVC: BaseVC {
             // fpc?.set(initialTopInset: containerView.frame.minY, finalTopInset: -(pageVC.buttonBarHeight - statusBarHeight))
             fpc?.set(initialTopInset: containerView.frame.minY, finalTopInset: 0)
         } else {
-            fpc?.set(initialTopInset: containerView.frame.minY - 120, finalTopInset: 0)
+            fpc?.set(initialTopInset: containerView.frame.minY - 120, finalTopInset: -20)
         }
         
         fpc?.addPanel(toParent: self)
     }
     
     private func setupImageSlideShow() {
-        guard let bannerImage = UIImage.banner else {
-            debugPrint("no banner image in resource")
-            return
-        }
         
+        imageSlideShow.slideshowInterval = 3
+        imageSlideShow.circular = true
         imageSlideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 72))
         imageSlideShow.contentScaleMode = .scaleAspectFill
-        imageSlideShow.setImageInputs([ImageSource(image: bannerImage),
-                                       ImageSource(image: bannerImage),
-                                       ImageSource(image: bannerImage)])
+        imageSlideShow.setImageInputs([ImageSource(image: UIImage.banner1),
+                                       ImageSource(image: UIImage.banner2),
+                                       ImageSource(image: UIImage.banner3)])
     }
 
 }
@@ -163,9 +167,7 @@ extension HomeVC: MenuFloatingPanelLayoutChangesDelegate {
         if initialY == 0 {
             initialY = y
         }
-       
         let top = initialY - y
         imageSliderTopConstraint.constant = top < 0 ? 0 : -top
-       // pageVC.buttonBarView.isHidden = y > 0 ? false : true
     }
 }

@@ -15,7 +15,7 @@ import UIKit
 //var Current = Environment.uat
 //#endif
 
-var Current = Environment.dev
+var Current = Environment.uat
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
