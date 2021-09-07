@@ -49,7 +49,7 @@ class CartVC: UIViewController, AppStoryboard, IndicatorInfoProvider {
     }
     
     private func setupBindings() {
-        presenter.outputs.orderItems
+        presenter.outputs.currentOrderItems
             .bind(onNext: { [weak self] items in
                 print("cart items: \(items.count)")
                 self?.tblCart.reloadData()
@@ -69,7 +69,7 @@ extension CartVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 1 ? 1 : presenter.outputs.orderItems.value.count
+        return section == 1 ? 1 : presenter.outputs.currentOrderItems.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,7 +80,8 @@ extension CartVC: UITableViewDataSource, UITableViewDelegate {
             return cell
         default:
             let cell = tableView.deque(CartCell.self)
-            cell.orderItem = presenter.outputs.orderItems.value[indexPath.row]
+            cell.orderItem = presenter.outputs.currentOrderItems.value[indexPath.row]
+            cell.delegate = self
             return cell
         }
     }
@@ -89,4 +90,10 @@ extension CartVC: UITableViewDataSource, UITableViewDelegate {
         return UITableView.automaticDimension
     }
     
+}
+
+extension CartVC: CartCellDelegate {
+    func didTapDeleteButton(of cell: CartCell, deleteOrderItem orderItem: OrderItem) {
+        presenter.inputs.deleteOrderItemTrigger.onNext(orderItem)
+    }
 }

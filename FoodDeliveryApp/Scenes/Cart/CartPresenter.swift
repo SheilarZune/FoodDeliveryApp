@@ -18,13 +18,15 @@ typealias CartPresenterDependencies = (
 )
 
 protocol CartPresenterInput {
-    var viewDidLoad: PublishSubject<Void> { get }
     var entryEntity: BehaviorSubject<CartEntryEntity?> { get }
+    var viewDidLoad: PublishSubject<Void> { get }
+    var deleteOrderItemTrigger: PublishSubject<OrderItem> { get }
 }
 
 protocol CartPresenterOutput {
-    var orderItems: BehaviorRelay<[OrderItem]> { get }
+    var currentOrderItems: BehaviorRelay<[OrderItem]> { get }
     var totalPrice: BehaviorSubject<String?> { get }
+    var cartUpdated: PublishSubject<(MenuCategory, [OrderItem])> { get }
 }
 
 protocol CartPresenterLogic {
@@ -34,11 +36,14 @@ protocol CartPresenterLogic {
 
 class CartPresenter: CartPresenterLogic, CartPresenterInput, CartPresenterOutput {
     // Input
-    var entryEntity: BehaviorSubject<CartEntryEntity?> = .init(value: nil)
     let viewDidLoad: PublishSubject<Void> = .init()
+    let entryEntity: BehaviorSubject<CartEntryEntity?> = .init(value: nil)
+    let deleteOrderItemTrigger: PublishSubject<OrderItem> = .init()
+    
     // Output
-    let orderItems: BehaviorRelay<[OrderItem]> = .init(value: [])
-    var totalPrice: BehaviorSubject<String?> = .init(value: nil)
+    let currentOrderItems: BehaviorRelay<[OrderItem]> = .init(value: [])
+    let totalPrice: BehaviorSubject<String?> = .init(value: nil)
+    var cartUpdated: PublishSubject<(MenuCategory, [OrderItem])> = .init()
     
     var inputs: CartPresenterInput { return self }
     var outputs: CartPresenterOutput { return self }
@@ -53,7 +58,7 @@ class CartPresenter: CartPresenterLogic, CartPresenterInput, CartPresenterOutput
             .withLatestFrom(entryEntity.map({ $0?.orderItems ?? [] }))
         
         viewDidLoadedOrderItems
-            .bind(to: orderItems)
+            .bind(to: currentOrderItems)
             .disposed(by: bag)
         
         // Interactor Input
@@ -68,10 +73,25 @@ class CartPresenter: CartPresenterLogic, CartPresenterInput, CartPresenterOutput
             .bind(to: dependencies.interactor.inputs.calculateTotalPrice)
             .disposed(by: bag)
         
+        deleteOrderItemTrigger
+            .bind(to: dependencies.interactor.inputs.deleteOrderItem)
+            .disposed(by: bag)
+        
         // Interactor Output
+        
         dependencies.interactor.outputs
             .responseTotalPrice
             .drive(totalPrice)
+            .disposed(by: bag)
+        
+        dependencies.interactor.outputs
+            .responseCartUpdated
+            .drive(cartUpdated)
+            .disposed(by: bag)
+        
+        dependencies.interactor.outputs
+            .responseCurrentOrderItems
+            .drive(currentOrderItems)
             .disposed(by: bag)
     }
 }

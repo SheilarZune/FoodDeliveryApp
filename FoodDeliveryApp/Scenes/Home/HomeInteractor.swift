@@ -35,9 +35,7 @@ class HomeInteractor: HomeInteractorLogic, HomeInteractorInput, HomeInteractorOu
     private let bag = DisposeBag()
     
     init() {
-        let errorTracker = ErrorTracker()
-        let activityTracker = ActivityTracker()
-        
+       
     }
 }
 

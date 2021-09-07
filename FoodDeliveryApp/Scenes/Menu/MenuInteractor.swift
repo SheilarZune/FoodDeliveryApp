@@ -15,6 +15,7 @@ protocol MenuInteractorLogic  {
 }
 
 protocol MenuInteractorInput {
+    var currentOrderItems: PublishSubject<[OrderItem]> { get }
     var fetchMenus: PublishSubject<MenuCategory> { get }
     var addMenu: PublishSubject<Menu> { get }
 }
@@ -32,6 +33,7 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
     var outputs: MenuInteractorOutput { return self }
     // Input
     let fetchMenus: PublishSubject<MenuCategory> = .init()
+    let currentOrderItems: PublishSubject<[OrderItem]> = .init()
     let addMenu: PublishSubject<Menu> = .init()
     // Output
     let responseMenus: Driver<[Menu]>
@@ -42,7 +44,6 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
     var presenter: MenuPresenterLogic?
     
     private let bag = DisposeBag()
-    private let currentOrderItems: PublishSubject<[OrderItem]> = .init()
     
     init() {
         let errorTracker = ErrorTracker()
@@ -93,16 +94,26 @@ class MenuInteractor: MenuInteractorLogic, MenuInteractorInput, MenuInteractorOu
                         }
                     }
                 } else {
-                    newOrderItems.append(OrderItem(menu: menu))
+                    var category: MenuCategory = .pizza
+                    switch menu {
+                    case is PizzaMenu:
+                        category = .pizza
+                    case is SushiMenu:
+                        category = .sushi
+                    case is DrinkMenu:
+                        category = .drinks
+                    default: break
+                    }
+                    newOrderItems.append(OrderItem(menu: menu, category: category))
                 }
                 return Observable.just(newOrderItems)
             }
             .asDriver(onErrorJustReturn: [])
         
+        // note: - update current order item input sequence
         responseOrders
             .drive { orderItems in
                 self.currentOrderItems.onNext(orderItems)
-                print("Order Items: \(orderItems.count)")
             }
             .disposed(by: bag)
     }

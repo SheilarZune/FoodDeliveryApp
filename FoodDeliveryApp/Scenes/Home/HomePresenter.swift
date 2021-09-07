@@ -19,7 +19,8 @@ protocol HomePresenterInput {
 }
 
 protocol HomePresenterOutput{
-    
+    var orderItemCount: BehaviorSubject<Int> { get }
+    var cartUpdated: PublishSubject<(MenuCategory, [OrderItem])> { get }
 }
 
 protocol HomePresenterLogic {
@@ -31,7 +32,10 @@ class HomePresenter: HomePresenterLogic, HomePresenterInput, HomePresenterOutput
     // Input
     let viewCartTrigger: PublishSubject<Void> = .init()
     let orderItems: BehaviorSubject<[OrderItem]> = .init(value: [])
+    
     // Output
+    let orderItemCount: BehaviorSubject<Int> = .init(value: 0)
+    var cartUpdated: PublishSubject<(MenuCategory, [OrderItem])> = .init()
     
     var inputs: HomePresenterInput { return self }
     var outputs: HomePresenterOutput { return self }
@@ -41,10 +45,16 @@ class HomePresenter: HomePresenterLogic, HomePresenterInput, HomePresenterOutput
     
     init(dependencies: HomePresenterDependencies) {
         self.dependencies = dependencies
+        
         viewCartTrigger
             .withLatestFrom(orderItems)
             .map({ CartContainerEntity(orderItems: $0) })
             .bind(onNext: openCartScreen)
+            .disposed(by: bag)
+                
+        orderItems.mapMany({ $0.qty })
+            .map({ $0.reduce(0, +) })
+            .bind(to: orderItemCount)
             .disposed(by: bag)
     }
     

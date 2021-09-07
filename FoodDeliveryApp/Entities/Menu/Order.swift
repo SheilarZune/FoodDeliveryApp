@@ -19,12 +19,16 @@ class PlaceOrderRequest: Mappable {
 }
 
 class OrderItem {
+    var id: String
     var menu: Menu
     var qty: Int
+    var category: MenuCategory
     
-    init(menu: Menu, qty: Int = 1) {
+    init(menu: Menu, category: MenuCategory, qty: Int = 1) {
+        self.id = UUID().uuidString
         self.menu = menu
         self.qty = qty
+        self.category = category
     }
 }
 

@@ -76,7 +76,6 @@ class MenuVC: BaseVC, AppStoryboard, IndicatorInfoProvider {
     private func setupBindings() {
         presenter?.outputs.menus
             .bind(onNext: { [weak self] menus in
-                print("menus: \(menus.count)")
                 self?.tblMenu.reloadData()
             })
             .disposed(by: bag)

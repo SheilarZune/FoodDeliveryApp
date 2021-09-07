@@ -25,9 +25,13 @@ class HomeVC: BaseVC {
     private let pageVC = SwipePageVC()
     private var fpc: MenuFloatingPanelController?
     private var initialY: CGFloat = 0
-    private let bag = DisposeBag()
     
+    let bag = DisposeBag()
     var presenter: HomePresenterLogic!
+
+    let pizzaVC = MenuVC.create(category: .pizza)
+    let sushiVC = MenuVC.create(category: .sushi)
+    let drinksVC = MenuVC.create(category: .drinks)
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -48,6 +52,7 @@ class HomeVC: BaseVC {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        setupBindings()
     }
     
     func setupView() {
@@ -58,6 +63,40 @@ class HomeVC: BaseVC {
         cartItemCountView.cornerRadius = cartItemCountView.frame.height / 2
         view.bringSubviewToFront(btnCart)
         view.bringSubviewToFront(cartItemCountView)
+    }
+    
+    private func setupBindings() {
+        
+        // Presenter Input
+        Observable.combineLatest(pizzaVC.presenter.outputs.orderItems.asObservable(),
+                         sushiVC.presenter.outputs.orderItems.asObservable(),
+                         drinksVC.presenter.outputs.orderItems.asObservable())
+            .bind(onNext: { [weak self] pizza, sushi, drink in
+                let orderItems = pizza + sushi + drink
+                self?.presenter.inputs.orderItems.onNext(orderItems)
+            })
+            .disposed(by: bag)
+        
+        // Presenter Output
+        
+        presenter.outputs
+            .orderItemCount
+            .map({ String($0) })
+            .bind(to: lblCartItemCount.rx.text)
+            .disposed(by: bag)
+        
+        presenter.outputs.cartUpdated
+            .bind(onNext: { [weak self] category, orderItems in
+                switch category {
+                case .pizza:
+                    self?.pizzaVC.presenter.inputs.cartUpdated.onNext(orderItems)
+                case .sushi:
+                    self?.sushiVC.presenter.inputs.cartUpdated.onNext(orderItems)
+                case .drinks:
+                    self?.drinksVC.presenter.inputs.cartUpdated.onNext(orderItems)
+                }
+            })
+            .disposed(by: bag)
         
         // interactions
         btnCart.rx.tap
@@ -66,22 +105,6 @@ class HomeVC: BaseVC {
     }
     
     private func setupFloatingPanel() {
-        
-        let pizzaVC = MenuVC.create(category: .pizza)
-        let sushiVC = MenuVC.create(category: .sushi)
-        let drinksVC = MenuVC.create(category: .drinks)
-        
-        // Order Items
-        Observable.combineLatest(pizzaVC.presenter.orderItems.asObservable(),
-                         sushiVC.presenter.orderItems.asObservable(),
-                         drinksVC.presenter.orderItems.asObservable()).bind { [weak self] pizza, sushi, drink in
-                            let pizzaCount = pizza.map({ $0.qty }).reduce(0, +)
-                            let sushiCount = sushi.map({ $0.qty }).reduce(0, +)
-                            let drinkCount = drink.map({ $0.qty }).reduce(0, +)
-                            self?.lblCartItemCount.text = "\(pizzaCount + sushiCount + drinkCount)"
-                            self?.presenter.inputs.orderItems.onNext(pizza + sushi + drink)
-                         }
-                        .disposed(by: bag)
         
         pageVC.childs = [pizzaVC, sushiVC, drinksVC]
         pageVC.buttonBarHeight = 80

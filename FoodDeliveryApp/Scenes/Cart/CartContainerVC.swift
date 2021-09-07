@@ -22,7 +22,6 @@ class CartContainerVC: BaseVC, AppStoryboard {
     
     private let bag = DisposeBag()
     
-    
     let cartVC = CartVC.screen()
     let orderVC = OrderVC.screen()
     let infoVC = InformationVC.screen()
