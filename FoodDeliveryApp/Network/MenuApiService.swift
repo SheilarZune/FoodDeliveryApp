@@ -13,6 +13,7 @@ protocol MenuApiServiceLogic: AnyObject {
     func getPizzaMenus() -> Observable<PizzaMenuResponse>
     func getSushiMenus() -> Observable<SushiMenuResponse>
     func getDrinkMenus() -> Observable<DrinkMenuResponse>
+    func placeOrder(request: PlaceOrderRequest) -> Observable<PlaceOrderResponse> // demo
 }
 
 extension MenuApiServiceLogic {
@@ -28,9 +29,14 @@ extension MenuApiServiceLogic {
     func getDrinkMenus() -> Observable<DrinkMenuResponse> {
         manager.request(DrinkMenuResponse.self, .getDrinkMenus)
     }
+    
+    func placeOrder(request: PlaceOrderRequest) -> Observable<PlaceOrderResponse> {
+        manager.request(PlaceOrderResponse.self, .placeOrder(request: request))
+    }
 }
 
 class MenuApiService: MenuApiServiceLogic {
+    
     static let shared: MenuApiService = .init() // Singleton
     
     var manager: ApiManager<ApiService>

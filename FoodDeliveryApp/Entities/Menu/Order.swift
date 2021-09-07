@@ -18,6 +18,14 @@ class PlaceOrderRequest: Mappable {
     }
 }
 
+class PlaceOrderResponse: BaseResponse {
+    // todo: - demo
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+    }
+}
+
 class OrderItem {
     var id: String
     var menu: Menu
