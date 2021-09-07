@@ -84,7 +84,7 @@ class CartInteractor: CartInteractorLogic, CartInteractorInput, CartInteractorOu
         // total price calculation
         
         let total = Observable.merge(calculateTotalPrice, deleteResult.map { $0.1 })
-            .mapMany({ Double($0.qty) * $0.menu.price.orZero })
+            .mapMany({ $0.totalPrice() })
             .map({ $0.reduce(0, +) })
             
         responseTotalPrice = Observable.combineLatest(total, currency)

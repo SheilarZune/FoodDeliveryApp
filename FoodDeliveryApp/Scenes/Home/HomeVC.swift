@@ -141,7 +141,6 @@ class HomeVC: BaseVC {
     
     private func setupImageSlideShow() {
         
-        imageSlideShow.slideshowInterval = 3
         imageSlideShow.circular = true
         imageSlideShow.pageIndicatorPosition = .init(horizontal: .center, vertical: .customBottom(padding: 72))
         imageSlideShow.contentScaleMode = .scaleAspectFill
@@ -169,5 +168,6 @@ extension HomeVC: MenuFloatingPanelLayoutChangesDelegate {
         }
         let top = initialY - y
         imageSliderTopConstraint.constant = top < 0 ? 0 : -top
+       
     }
 }

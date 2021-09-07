@@ -28,7 +28,7 @@ class CartCell: UITableViewCell {
             }
             imgMenu.image = UIImage(named: orderItem.menu.image.orEmpty)
             lblMenuName.text = orderItem.menu.menu.orEmpty + " x \(orderItem.qty)"
-            lblMenuItemPrice.text = orderItem.menu.price.orZero.toCurrency().orEmpty + " " + orderItem.menu.currency.orEmpty
+            lblMenuItemPrice.text = "\(orderItem.totalPrice().toCurrency().orEmpty) \(orderItem.menu.currency.orEmpty)" 
         }
     }
     override func awakeFromNib() {

@@ -54,7 +54,7 @@ extension ApiService: TargetType {
         case .getPizzaMenus:
             return "/b/OGG1"
         case .getSushiMenus:
-            return "/b/OGG4"
+            return "/b/C2S0"
         case .getDrinkMenus:
             return "/b/OHRJ"
         case .placeOrder:

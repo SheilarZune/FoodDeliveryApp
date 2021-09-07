@@ -30,5 +30,9 @@ class OrderItem {
         self.qty = qty
         self.category = category
     }
+    
+    func totalPrice() -> Double {
+        return menu.price.orZero * Double(qty)
+    }
 }
 
